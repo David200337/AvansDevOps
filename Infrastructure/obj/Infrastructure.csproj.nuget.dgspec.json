@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dcwva\\source\\repos\\AvansDevOps\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\Dev\\AvansDevOps\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dcwva\\source\\repos\\AvansDevOps\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Dev\\AvansDevOps\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dcwva\\source\\repos\\AvansDevOps\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Dev\\AvansDevOps\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Dcwva\\source\\repos\\AvansDevOps\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Dev\\AvansDevOps\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Dcwva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dcwva\\source\\repos\\AvansDevOps\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Dev\\AvansDevOps\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dcwva\\AppData\\Roaming\\NuGet\\NuGet.Config",
