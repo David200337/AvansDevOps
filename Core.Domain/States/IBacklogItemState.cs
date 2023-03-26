@@ -2,9 +2,17 @@
 {
     public interface IBacklogItemState
     {
-        void MoveToNextState(BacklogItem item);
+        void SetToDo(BacklogItem item);
 
-        void MoveToPreviousState(BacklogItem item);
+        void SetInProgress(BacklogItem item);
+
+        void SetReadyForTesting(BacklogItem item);
+
+        void SetTesting(BacklogItem item);
+
+        void SetTested(BacklogItem item);
+
+        void SetDone(BacklogItem item);
 
         String GetStateName();
     }

@@ -23,19 +23,34 @@ namespace Core.Domain
             _assignee = assignee;
         }
 
-        internal void SetState(IBacklogItemState state)
+        public void SetToDo()
         {
-            _state = state;
+            _state.SetToDo(this);
         }
 
-        public void MoveToNextState()
+        public void SetInProgress()
         {
-            _state.MoveToNextState(this);
+            _state.SetInProgress(this);
         }
 
-        public void MoveToPreviousState()
+        public void SetReadyForTesting()
         {
-            _state.MoveToPreviousState(this);
+            _state.SetReadyForTesting(this);
+        }
+
+        public void SetTesting()
+        {
+            _state.SetTesting(this);
+        }
+
+        public void SetTested()
+        {
+            _state.SetTested(this);
+        }
+
+        public void SetDone()
+        {
+            _state.SetDone(this);
         }
     }
 }

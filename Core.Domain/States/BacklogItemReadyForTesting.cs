@@ -2,14 +2,34 @@
 {
     public class BacklogItemReadyForTesting : IBacklogItemState
     {
-        public void MoveToNextState(BacklogItem item)
+        public void SetToDo(BacklogItem item)
         {
-            item.SetState(new BacklogItemDone());
+            item.SetToDo();
         }
 
-        public void MoveToPreviousState(BacklogItem item)
+        public void SetInProgress(BacklogItem item)
         {
-            item.SetState(new BacklogItemInProgress());
+            item.SetInProgress();
+        }
+
+        public void SetReadyForTesting(BacklogItem item)
+        {
+            // Do nothing, already in this state.
+        }
+
+        public void SetTesting(BacklogItem item)
+        {
+            item.SetTesting();
+        }
+
+        public void SetTested(BacklogItem item)
+        {
+            item.SetTested();
+        }
+
+        public void SetDone(BacklogItem item)
+        {
+            item.SetDone();
         }
 
         public string GetStateName() => "Ready for Testing";

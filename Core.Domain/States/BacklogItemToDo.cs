@@ -2,15 +2,34 @@
 {
     public class BacklogItemToDo : IBacklogItemState
     {
-
-        public void MoveToNextState(BacklogItem item)
+        public void SetToDo(BacklogItem item)
         {
-            item.SetState(new BacklogItemInProgress());
+            // Do nothing, already in this state.
         }
 
-        public void MoveToPreviousState(BacklogItem item)
+        public void SetInProgress(BacklogItem item)
         {
-            throw new Exception("A previous state does not exist.");
+            item.SetInProgress();
+        }
+
+        public void SetReadyForTesting(BacklogItem item)
+        {
+            item.SetReadyForTesting();
+        }
+
+        public void SetTesting(BacklogItem item)
+        {
+            item.SetTesting();
+        }
+
+        public void SetTested(BacklogItem item)
+        {
+            item.SetTested();
+        }
+
+        public void SetDone(BacklogItem item)
+        {
+            item.SetDone();
         }
 
         public string GetStateName() => "To Do";
