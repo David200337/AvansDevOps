@@ -2,7 +2,7 @@
 
 namespace Core.Domain
 {
-    public class BacklogItem : ISubject<BacklogItem>
+    public class BacklogItem : Stateful<BacklogItemState>, ISubject<BacklogItem>
     {
         private string _id;
 
@@ -14,14 +14,11 @@ namespace Core.Domain
 
         private List<Task> _tasks;
 
-        private BacklogItemState _state;
-
         private Dictionary<Role, List<IObserver<BacklogItem>>> _observers;
 
-        public BacklogItem(string id, string title, string description, User assignee)
+        public BacklogItem(string id, string title, string description, User assignee) : base(new BacklogItemToDo())
         {
             _id = id;
-            _state = new BacklogItemToDo();
             _title = title;
             _description = description;
             _assignee = assignee;
@@ -40,28 +37,24 @@ namespace Core.Domain
 
         public List<Task> Tasks => _tasks;
 
-        public BacklogItemState State => _state;
-
         // State transitions
-        internal void SetState(BacklogItemState state) => _state = state;
+        public void SetToDo() => State.SetToDo(this);
 
-        public void SetToDo() => _state.SetToDo(this);
-
-        public void SetInProgress() => _state.SetInProgress(this);
+        public void SetInProgress() => State.SetInProgress(this);
 
         public void SetReadyForTesting()
         {
-            _state.SetReadyForTesting(this);
+            State.SetReadyForTesting(this);
 
             // Notify the testers that the item is ready for testing.
             Notify(Role.Tester, this);
         }
 
-        public void SetTesting() => _state.SetTesting(this);
+        public void SetTesting() => State.SetTesting(this);
 
-        public void SetTested() => _state.SetTested(this);
+        public void SetTested() => State.SetTested(this);
 
-        public void SetDone() => _state.SetDone(this);
+        public void SetDone() => State.SetDone(this);
 
         // Observer pattern
         public void RegisterObserver(Role role, IObserver<BacklogItem> observer)
