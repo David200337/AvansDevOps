@@ -129,6 +129,5 @@ namespace Core.Domain
         public void AddTester(User tester) => RegisterObserver(Role.Tester, tester);
 
         public void RemoveTester(User tester) => RemoveObserver(Role.Tester, tester);
-
     }
 }
