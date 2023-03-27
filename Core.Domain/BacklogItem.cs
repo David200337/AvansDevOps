@@ -14,6 +14,8 @@ namespace Core.Domain
 
         private User _assignee;
 
+        private List<Task> _tasks;
+
         private Dictionary<Role, List<IObserver<BacklogItem>>> _observers;
 
         public BacklogItem(string id, string title, string description, User assignee)
@@ -23,6 +25,7 @@ namespace Core.Domain
             _title = title;
             _description = description;
             _assignee = assignee;
+            _tasks = new List<Task>();
             _observers = new Dictionary<Role, List<IObserver<BacklogItem>>>();
         }
 
@@ -106,5 +109,11 @@ namespace Core.Domain
 
         // Methods
         public void AddTester(User tester) => RegisterObserver(Role.Tester, tester);
+
+        public void RemoveTester(User tester) => RemoveObserver(Role.Tester, tester);
+
+        public void AddTask(Task task) => _tasks.Add(task);
+
+        public void RemoveTask(Task task) => _tasks.Remove(task);
     }
 }
