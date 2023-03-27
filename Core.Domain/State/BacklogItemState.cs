@@ -16,6 +16,6 @@
 
         public abstract string GetName();
 
-        internal void InvalidTransition() => throw new InvalidOperationException("Invalid state transition.");
+        internal static void InvalidTransition() => throw new InvalidOperationException("Invalid state transition.");
     }
 }
