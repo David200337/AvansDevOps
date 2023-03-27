@@ -3,6 +3,7 @@ using Core.Domain;
 
 Console.WriteLine("Hello, World!");
 
+// Test code
 var assignee = new User("1", "John", "Doe", "john@doe.com", "JohnnyDoe");
 
 var tester = new User("2", "Jane", "Doe", "jane@doe.com", "JaneDoe");

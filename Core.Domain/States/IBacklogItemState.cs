@@ -1,19 +1,21 @@
 ﻿namespace Core.Domain.States
 {
-    public interface IBacklogItemState
+    public abstract class BacklogItemState
     {
-        void SetToDo(BacklogItem item);
+        public abstract void SetToDo(BacklogItem item);
 
-        void SetInProgress(BacklogItem item);
+        public abstract void SetInProgress(BacklogItem item);
 
-        void SetReadyForTesting(BacklogItem item);
+        public abstract void SetReadyForTesting(BacklogItem item);
 
-        void SetTesting(BacklogItem item);
+        public abstract void SetTesting(BacklogItem item);
 
-        void SetTested(BacklogItem item);
+        public abstract void SetTested(BacklogItem item);
 
-        void SetDone(BacklogItem item);
+        public abstract void SetDone(BacklogItem item);
 
-        String GetStateName();
+        public abstract string GetName();
+
+        internal void InvalidTransition() => throw new InvalidOperationException("Invalid state transition.");
     }
 }

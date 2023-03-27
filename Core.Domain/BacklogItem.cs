@@ -6,7 +6,7 @@ namespace Core.Domain
     {
         private string _id;
 
-        private IBacklogItemState _state;
+        private BacklogItemState _state;
 
         private string _title;
 
@@ -26,15 +26,15 @@ namespace Core.Domain
             _observers = new Dictionary<Role, List<IObserver<BacklogItem>>>();
         }
 
-        public void SetToDo()
-        {
-            _state.SetToDo(this);
-        }
+        // Properties
+        public BacklogItemState State => _state;
 
-        public void SetInProgress()
-        {
-            _state.SetInProgress(this);
-        }
+        // State transitions
+        internal void SetState(BacklogItemState state) => _state = state;
+
+        public void SetToDo() => _state.SetToDo(this);
+
+        public void SetInProgress() => _state.SetInProgress(this);
 
         public void SetReadyForTesting()
         {
@@ -44,21 +44,13 @@ namespace Core.Domain
             Notify(Role.Tester, this);
         }
 
-        public void SetTesting()
-        {
-            _state.SetTesting(this);
-        }
+        public void SetTesting() => _state.SetTesting(this);
 
-        public void SetTested()
-        {
-            _state.SetTested(this);
-        }
+        public void SetTested() => _state.SetTested(this);
 
-        public void SetDone()
-        {
-            _state.SetDone(this);
-        }
+        public void SetDone() => _state.SetDone(this);
 
+        // Observer pattern
         public void RegisterObserver(Role role, IObserver<BacklogItem> observer)
         {
             var observers = _observers.GetValueOrDefault(role);
@@ -112,9 +104,7 @@ namespace Core.Domain
             }
         }
 
-        public void AddTester(User tester)
-        {
-            RegisterObserver(Role.Tester, tester);
-        }
+        // Methods
+        public void AddTester(User tester) => RegisterObserver(Role.Tester, tester);
     }
 }

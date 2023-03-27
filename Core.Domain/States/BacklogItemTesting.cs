@@ -1,37 +1,19 @@
 ﻿namespace Core.Domain.States
 {
-    internal class BacklogItemTesting : IBacklogItemState
+    internal class BacklogItemTesting : BacklogItemState
     {
-        public void SetToDo(BacklogItem item)
-        {
-            item.SetToDo();
-        }
+        public override void SetToDo(BacklogItem item) => item.SetState(new BacklogItemToDo());
 
-        public void SetInProgress(BacklogItem item)
-        {
-            item.SetInProgress();
-        }
+        public override void SetInProgress(BacklogItem item) => item.SetState(new BacklogItemInProgress());
 
-        public void SetReadyForTesting(BacklogItem item)
-        {
-            item.SetReadyForTesting();
-        }
+        public override void SetReadyForTesting(BacklogItem item) => item.SetState(new BacklogItemReadyForTesting());
 
-        public void SetTesting(BacklogItem item)
-        {
-            // Do nothing, already in this state.
-        }
+        public override void SetTesting(BacklogItem item) => InvalidTransition();
 
-        public void SetTested(BacklogItem item)
-        {
-            item.SetTested();
-        }
+        public override void SetTested(BacklogItem item) => item.SetState(new BacklogItemTested());
 
-        public void SetDone(BacklogItem item)
-        {
-            item.SetDone();
-        }
+        public override void SetDone(BacklogItem item) => item.SetState(new BacklogItemDone());
 
-        public string GetStateName() => "Testing";
+        public override string GetName() => "Testing";
     }
 }

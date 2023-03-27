@@ -22,10 +22,6 @@
             _username = username;
         }
 
-        public void Update(Role role, ISubject<BacklogItem> subject)
-        {
-            // TODO: Send a notification to the user
-            Console.WriteLine("User {0} has been notified of an update: {1}", _username, subject);
-        }
+        public void Update(Role role, BacklogItem subject) => Console.WriteLine("User {0} has been notified of a state update: {1}", _username, subject.State.GetName());
     }
 }
