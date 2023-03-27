@@ -1,6 +1,8 @@
-﻿namespace Core.Domain
+﻿using Core.Domain.State;
+
+namespace Core.Domain
 {
-    public class Task
+    public class Task : Stateful<TaskState>
     {
         private readonly string _id;
 
@@ -10,7 +12,7 @@
 
         private User? _assignee;
 
-        public Task(string id, string title, string description, User assignee)
+        public Task(string id, string title, string description, User assignee) : base(new TaskToDo())
         {
             _id = id;
             _title = title;
@@ -26,6 +28,19 @@
         public string Description => _description;
 
         public User? Assignee => _assignee;
+
+        // State transitions
+        public void SetToDo() => State.SetToDo(this);
+
+        public void SetInProgress() => State.SetInProgress(this);
+
+        public void SetReadyForTesting() => State.SetReadyForTesting(this);
+
+        public void SetTesting() => State.SetTesting(this);
+
+        public void SetTested() => State.SetTested(this);
+
+        public void SetDone() => State.SetDone(this);
 
         // Methods
         public void AddAssignee(User assignee) => _assignee = assignee;
