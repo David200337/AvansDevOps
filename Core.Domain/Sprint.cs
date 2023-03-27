@@ -10,12 +10,15 @@
 
         private DateTime _endDate;
 
-        public Sprint(string title, string description, DateTime startDate, DateTime endDate)
+        private User _scrumMaster;
+
+        public Sprint(string title, string description, DateTime startDate, DateTime endDate, User scrumMaster)
         {
             _title = title;
             _description = description;
             _startDate = startDate;
             _endDate = endDate;
+            _scrumMaster = scrumMaster;
         }
     }
 }
