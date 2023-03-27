@@ -6,15 +6,15 @@ namespace Core.Domain
     {
         private string _id;
 
-        private BacklogItemState _state;
-
         private string _title;
 
         private string _description;
 
-        private User _assignee;
+        private User? _assignee;
 
         private List<Task> _tasks;
+
+        private BacklogItemState _state;
 
         private Dictionary<Role, List<IObserver<BacklogItem>>> _observers;
 
@@ -30,6 +30,16 @@ namespace Core.Domain
         }
 
         // Properties
+        public string Id => _id;
+
+        public string Title => _title;
+
+        public string Description => _description;
+
+        public User? Assignee => _assignee;
+
+        public List<Task> Tasks => _tasks;
+
         public BacklogItemState State => _state;
 
         // State transitions
@@ -108,12 +118,17 @@ namespace Core.Domain
         }
 
         // Methods
-        public void AddTester(User tester) => RegisterObserver(Role.Tester, tester);
+        public void AddAssignee(User assignee) => _assignee = assignee;
 
-        public void RemoveTester(User tester) => RemoveObserver(Role.Tester, tester);
+        public void RemoveAssignee() => _assignee = null;
 
         public void AddTask(Task task) => _tasks.Add(task);
 
         public void RemoveTask(Task task) => _tasks.Remove(task);
+
+        public void AddTester(User tester) => RegisterObserver(Role.Tester, tester);
+
+        public void RemoveTester(User tester) => RemoveObserver(Role.Tester, tester);
+
     }
 }
