@@ -1,4 +1,4 @@
-﻿namespace Core.Domain.States
+﻿namespace Core.Domain.State
 {
     public abstract class BacklogItemState
     {

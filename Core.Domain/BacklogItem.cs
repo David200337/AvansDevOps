@@ -1,4 +1,4 @@
-﻿using Core.Domain.States;
+﻿using Core.Domain.State;
 
 namespace Core.Domain
 {
