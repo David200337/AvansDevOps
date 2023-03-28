@@ -54,7 +54,14 @@ namespace Core.Domain
 
         public void SetTested() => State.SetTested(this);
 
-        public void SetDone() => State.SetDone(this);
+        public void SetDone()
+        {
+            // A backlog item's state should only be allowed to be set to done
+            // when its correspoding tasks are done.
+            if (!AreTasksDone()) return;
+
+            State.SetDone(this);
+        }
 
         // Observer pattern
         public void RegisterObserver(Role role, IObserver<BacklogItem> observer)
@@ -122,5 +129,7 @@ namespace Core.Domain
         public void AddTester(User tester) => RegisterObserver(Role.Tester, tester);
 
         public void RemoveTester(User tester) => RemoveObserver(Role.Tester, tester);
+
+        public bool AreTasksDone() => _tasks.All(t => t.State is TaskDone);
     }
 }
