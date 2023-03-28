@@ -1,6 +1,8 @@
-﻿namespace Core.Domain
+﻿using Core.Domain.State;
+
+namespace Core.Domain
 {
-    public class Sprint
+    public abstract class Sprint : Stateful<SprintState>
     {
         private string _title;
 
@@ -14,7 +16,7 @@
 
         private List<BacklogItem> _backlog;
 
-        public Sprint(string title, string description, DateTime startDate, DateTime endDate, User scrumMaster)
+        public Sprint(string title, string description, DateTime startDate, DateTime endDate, User scrumMaster) : base(new SprintCreated())
         {
             _title = title;
             _description = description;
@@ -36,6 +38,19 @@
         public User ScrumMaster => _scrumMaster;
 
         public List<BacklogItem> Backlog => _backlog;
+
+        // State transitions
+        public void SetCreated() => State.SetCreated(this);
+
+        public void SetInProgress() => State.SetInProgress(this);
+
+        public void SetFinished() => State.SetFinished(this);
+
+        public void SetInRelease() => State.SetInRelease(this);
+
+        public void SetReleased() => State.SetReleased(this);
+
+        public void SetReleaseCancelled() => State.SetReleaseCancelled(this);
 
         // Methods
         public void AddBacklogItem(BacklogItem backlogItem) => _backlog.Add(backlogItem);
