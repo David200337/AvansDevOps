@@ -2,10 +2,10 @@
 {
     public interface ISubject<T>
     {
-        void RegisterObserver(Role role, IObserver<T> observer);
+        void RegisterObserver(IObserver<T> observer);
 
-        void RemoveObserver(Role role, IObserver<T> observer);
+        void RemoveObserver(IObserver<T> observer);
 
-        void Notify(Role role, T subject);
+        void Notify(T subject);
     }
 }

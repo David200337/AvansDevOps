@@ -1,6 +1,4 @@
-C:\Dev\AvansDevOps\Core.Domain\bin\Debug\net7.0\Core.Domain.exe
 C:\Dev\AvansDevOps\Core.Domain\bin\Debug\net7.0\Core.Domain.deps.json
-C:\Dev\AvansDevOps\Core.Domain\bin\Debug\net7.0\Core.Domain.runtimeconfig.json
 C:\Dev\AvansDevOps\Core.Domain\bin\Debug\net7.0\Core.Domain.dll
 C:\Dev\AvansDevOps\Core.Domain\bin\Debug\net7.0\Core.Domain.pdb
 C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\Core.Domain.csproj.AssemblyReference.cache
@@ -11,5 +9,4 @@ C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\Core.Domain.csproj.CoreCompileIn
 C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\Core.Domain.dll
 C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\refint\Core.Domain.dll
 C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\Core.Domain.pdb
-C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\Core.Domain.genruntimeconfig.cache
 C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\ref\Core.Domain.dll

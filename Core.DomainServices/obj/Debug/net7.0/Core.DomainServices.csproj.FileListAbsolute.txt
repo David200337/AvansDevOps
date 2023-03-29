@@ -1,0 +1,15 @@
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\Core.DomainServices.csproj.AssemblyReference.cache
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\Core.DomainServices.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\Core.DomainServices.AssemblyInfoInputs.cache
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\Core.DomainServices.AssemblyInfo.cs
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\Core.DomainServices.csproj.CoreCompileInputs.cache
+C:\Dev\AvansDevOps\Core.DomainServices\bin\Debug\net7.0\Core.DomainServices.deps.json
+C:\Dev\AvansDevOps\Core.DomainServices\bin\Debug\net7.0\Core.DomainServices.dll
+C:\Dev\AvansDevOps\Core.DomainServices\bin\Debug\net7.0\Core.DomainServices.pdb
+C:\Dev\AvansDevOps\Core.DomainServices\bin\Debug\net7.0\Core.Domain.dll
+C:\Dev\AvansDevOps\Core.DomainServices\bin\Debug\net7.0\Core.Domain.pdb
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\Core.DomainServices.csproj.CopyComplete
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\Core.DomainServices.dll
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\refint\Core.DomainServices.dll
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\Core.DomainServices.pdb
+C:\Dev\AvansDevOps\Core.DomainServices\obj\Debug\net7.0\ref\Core.DomainServices.dll

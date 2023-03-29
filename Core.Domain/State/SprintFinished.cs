@@ -4,7 +4,7 @@
     {
         public override void SetCreated(Sprint sprint) => sprint.SetState(new SprintCreated());
 
-        public override void SetInProgress(Sprint sprint) => sprint.SetState(new SprintFinished);
+        public override void SetInProgress(Sprint sprint) => sprint.SetState(new SprintFinished());
 
         public override void SetFinished(Sprint sprint) => InvalidTransition();
 

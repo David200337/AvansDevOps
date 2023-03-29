@@ -1,0 +1,17 @@
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\Infrastructure.AssemblyInfo.cs
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Dev\AvansDevOps\Infrastructure\bin\Debug\net7.0\Infrastructure.deps.json
+C:\Dev\AvansDevOps\Infrastructure\bin\Debug\net7.0\Infrastructure.dll
+C:\Dev\AvansDevOps\Infrastructure\bin\Debug\net7.0\Infrastructure.pdb
+C:\Dev\AvansDevOps\Infrastructure\bin\Debug\net7.0\Core.Domain.dll
+C:\Dev\AvansDevOps\Infrastructure\bin\Debug\net7.0\Core.DomainServices.dll
+C:\Dev\AvansDevOps\Infrastructure\bin\Debug\net7.0\Core.DomainServices.pdb
+C:\Dev\AvansDevOps\Infrastructure\bin\Debug\net7.0\Core.Domain.pdb
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\Infrastructure.csproj.CopyComplete
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\Infrastructure.dll
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\refint\Infrastructure.dll
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\Infrastructure.pdb
+C:\Dev\AvansDevOps\Infrastructure\obj\Debug\net7.0\ref\Infrastructure.dll

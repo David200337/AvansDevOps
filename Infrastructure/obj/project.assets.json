@@ -1,11 +1,49 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {}
+    "net7.0": {
+      "Core.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Core.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.Domain.dll": {}
+        }
+      },
+      "Core.DomainServices/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Core.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Core.DomainServices.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.DomainServices.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Core.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Core.Domain/Core.Domain.csproj",
+      "msbuildProject": "../Core.Domain/Core.Domain.csproj"
+    },
+    "Core.DomainServices/1.0.0": {
+      "type": "project",
+      "path": "../Core.DomainServices/Core.DomainServices.csproj",
+      "msbuildProject": "../Core.DomainServices/Core.DomainServices.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0": []
+    "net7.0": [
+      "Core.Domain >= 1.0.0",
+      "Core.DomainServices >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Dcwva\\.nuget\\packages\\": {}
@@ -33,7 +71,14 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Dev\\AvansDevOps\\Core.DomainServices\\Core.DomainServices.csproj": {
+              "projectPath": "C:\\Dev\\AvansDevOps\\Core.DomainServices\\Core.DomainServices.csproj"
+            },
+            "C:\\Dev\\AvansDevOps\\Core.Domain\\Core.Domain.csproj": {
+              "projectPath": "C:\\Dev\\AvansDevOps\\Core.Domain\\Core.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

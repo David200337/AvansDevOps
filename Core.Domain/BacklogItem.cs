@@ -47,7 +47,7 @@ namespace Core.Domain
             State.SetReadyForTesting(this);
 
             // Notify the testers that the item is ready for testing.
-            Notify(Role.Tester, this);
+            Notify(this);
         }
 
         public void SetTesting() => State.SetTesting(this);
@@ -64,8 +64,11 @@ namespace Core.Domain
         }
 
         // Observer pattern
-        public void RegisterObserver(Role role, IObserver<BacklogItem> observer)
+        public void RegisterObserver(IObserver<BacklogItem> observer)
         {
+            // TODO: REMOVE!
+            var role = Role.Tester;
+
             var observers = _observers.GetValueOrDefault(role);
 
             if (observers == null)
@@ -92,8 +95,11 @@ namespace Core.Domain
             _observers[role].Add(observer);
         }
 
-        public void RemoveObserver(Role role, IObserver<BacklogItem> observer)
+        public void RemoveObserver(IObserver<BacklogItem> observer)
         {
+            // TODO: REMOVE!
+            var role = Role.Tester;
+
             var observers = _observers[role];
 
             // No observers for this role.
@@ -103,8 +109,11 @@ namespace Core.Domain
             _observers[role].Remove(observer);
         }
 
-        public void Notify(Role role, BacklogItem subject)
+        public void Notify(BacklogItem subject)
         {
+            // TODO: REMOVE!
+            var role = Role.Tester;
+
             var observers = _observers[role];
 
             // No observers for this role.
@@ -113,7 +122,7 @@ namespace Core.Domain
             // Loop through all observers of the specified role and notify them.
             foreach (var observer in observers)
             {
-                observer.Update(role, subject);
+                observer.Update(subject);
             }
         }
 
@@ -126,9 +135,9 @@ namespace Core.Domain
 
         public void RemoveTask(Task task) => _tasks.Remove(task);
 
-        public void AddTester(User tester) => RegisterObserver(Role.Tester, tester);
+        public void AddTester(User tester) => RegisterObserver(tester);
 
-        public void RemoveTester(User tester) => RemoveObserver(Role.Tester, tester);
+        public void RemoveTester(User tester) => RemoveObserver(tester);
 
         public bool AreTasksDone() => _tasks.All(t => t.State is TaskDone);
     }
