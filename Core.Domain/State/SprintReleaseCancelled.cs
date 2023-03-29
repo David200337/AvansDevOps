@@ -14,5 +14,6 @@
 
         public override void SetReleased(Sprint sprint) => sprint.SetState(new SprintReleased());
 
+        public override string GetName() => "Release Cancelled";
     }
 }

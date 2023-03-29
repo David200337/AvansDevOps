@@ -13,5 +13,7 @@
         public override void SetReleaseCancelled(Sprint sprint) => sprint.SetState(new SprintReleaseCancelled());
 
         public override void SetReleased(Sprint sprint) => InvalidTransition();
+
+        public override string GetName() => "Released";
     }
 }

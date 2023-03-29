@@ -14,6 +14,8 @@
 
         public abstract void SetReleaseCancelled(Sprint sprint);
 
+        public abstract string GetName();
+
         internal static void InvalidTransition() => throw new InvalidOperationException("Invalid state transition.");
     }
 }

@@ -13,5 +13,7 @@
         public override void SetReleaseCancelled(Sprint sprint) => sprint.SetState(new SprintReleaseCancelled());
 
         public override void SetReleased(Sprint sprint) => sprint.SetState(new SprintReleased());
+
+        public override string GetName() => "Created";
     }
 }
