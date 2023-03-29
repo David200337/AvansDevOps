@@ -27,13 +27,53 @@ namespace Core.Domain
         }
 
         // Properties
-        public string Title => _title;
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                if (State is not SprintCreated)
+                    throw new InvalidOperationException("Title cannot be set at this state.");
 
-        public string Description => _description;
+                _title = value;
+            }
+        }
 
-        public DateTime StartDate => _startDate;
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                if (State is not SprintCreated)
+                    throw new InvalidOperationException("Description cannot be set at this state.");
 
-        public DateTime EndDate => _endDate;
+                _description = value;
+            }
+        }
+
+        public DateTime StartDate
+        {
+            get => _startDate;
+            set
+            {
+                if (State is not SprintCreated)
+                    throw new InvalidOperationException("StartDate cannot be set at this state.");
+
+                _startDate = value;
+            }
+        }
+
+        public DateTime EndDate
+        {
+            get => _endDate;
+            set
+            {
+                if (State is not SprintCreated)
+                    throw new InvalidOperationException("EndDate cannot be set at this state.");
+
+                _endDate = value;
+            }
+        }
 
         public User ScrumMaster => _scrumMaster;
 
