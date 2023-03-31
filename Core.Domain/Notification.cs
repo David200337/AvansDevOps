@@ -22,5 +22,7 @@
             get => _message;
             set => _message = value;
         }
+
+        public override string ToString() => $"User: {_user}, Message: {_message}";
     }
 }

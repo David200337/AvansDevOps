@@ -71,7 +71,7 @@ namespace Core.Domain
 
         public void RemoveObserver(IObserver<BacklogItem> observer) => _observers.Remove(observer);
 
-        public void Notify(BacklogItem subject) => _observers.ForEach(o => o.Update(subject));
+        public void Notify(BacklogItem backlogItem) => _observers.ForEach(o => o.Update(backlogItem));
 
         // Methods
         public void AddAssignee(User assignee) => _assignee = assignee;
@@ -85,6 +85,8 @@ namespace Core.Domain
         public void AddTester(User tester) => _userRoleManager.AddUserToRole(tester, Role.Tester);
 
         public void RemoveTester(User tester) => _userRoleManager.RemoveUserFromRole(tester, Role.Tester);
+
+        public List<User> GetTesters() => _userRoleManager.GetUsersByRole(Role.Tester);
 
         public bool AreTasksDone() => _tasks.All(t => t.State is TaskDone);
     }

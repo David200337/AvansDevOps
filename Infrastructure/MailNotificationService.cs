@@ -3,13 +3,13 @@ using Core.DomainServices;
 
 namespace Infrastructure
 {
-    public class MailNotificationService : INotificationService, Core.Domain.IObserver<BacklogItem>
+    public class MailNotificationService : NotificationService
     {
-        public void SendNotification(Notification notification)
+        public override void SendNotification(Notification notification)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Sending notification via email...");
+            Console.WriteLine(notification.ToString());
+            Console.WriteLine("Email notification sent!");
         }
-
-        public void Update(BacklogItem backlogItem) => Console.WriteLine($"Notification service received a backlog item update: {0}", backlogItem);
     }
 }
