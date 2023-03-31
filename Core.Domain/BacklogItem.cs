@@ -14,7 +14,9 @@ namespace Core.Domain
 
         private List<Task> _tasks;
 
-        private Dictionary<Role, List<IObserver<BacklogItem>>> _observers;
+        private UserRoleManager _userRoleManager;
+
+        private List<IObserver<BacklogItem>> _observers;
 
         public BacklogItem(string id, string title, string description, User assignee) : base(new BacklogItemToDo())
         {
@@ -23,7 +25,8 @@ namespace Core.Domain
             _description = description;
             _assignee = assignee;
             _tasks = new List<Task>();
-            _observers = new Dictionary<Role, List<IObserver<BacklogItem>>>();
+            _userRoleManager = new UserRoleManager();
+            _observers = new List<IObserver<BacklogItem>>();
         }
 
         // Properties
@@ -64,67 +67,11 @@ namespace Core.Domain
         }
 
         // Observer pattern
-        public void RegisterObserver(IObserver<BacklogItem> observer)
-        {
-            // TODO: REMOVE!
-            var role = Role.Tester;
+        public void RegisterObserver(IObserver<BacklogItem> observer) => _observers.Add(observer);
 
-            var observers = _observers.GetValueOrDefault(role);
+        public void RemoveObserver(IObserver<BacklogItem> observer) => _observers.Remove(observer);
 
-            if (observers == null)
-            {
-                // Observers for this role do not exist.
-                // Create a new list with the specified observer.
-                observers = new List<IObserver<BacklogItem>>
-                {
-                    observer
-                };
-
-                // Pass the new list of observers with corresponding role to the dictionary.
-                _observers.Add(role, observers);
-                return;
-            }
-            else if (observers.Contains(observer))
-            {
-                // The observer is already registered for this role.
-                return;
-            }
-
-            // There are existing observers for this role.
-            // Add the specified observer to the list.
-            _observers[role].Add(observer);
-        }
-
-        public void RemoveObserver(IObserver<BacklogItem> observer)
-        {
-            // TODO: REMOVE!
-            var role = Role.Tester;
-
-            var observers = _observers[role];
-
-            // No observers for this role.
-            if (observers == null) return;
-
-            // Remove the specified observer from the list.
-            _observers[role].Remove(observer);
-        }
-
-        public void Notify(BacklogItem subject)
-        {
-            // TODO: REMOVE!
-            var role = Role.Tester;
-
-            var observers = _observers[role];
-
-            // No observers for this role.
-            if (observers == null) return;
-
-            // Loop through all observers of the specified role and notify them.
-            foreach (var observer in observers)
-            {
-                observer.Update(subject);
-            }
-        }
+        public void Notify(BacklogItem subject) => _observers.ForEach(o => o.Update(subject));
 
         // Methods
         public void AddAssignee(User assignee) => _assignee = assignee;
@@ -135,9 +82,9 @@ namespace Core.Domain
 
         public void RemoveTask(Task task) => _tasks.Remove(task);
 
-        public void AddTester(User tester) => RegisterObserver(tester);
+        public void AddTester(User tester) => _userRoleManager.AddUserToRole(tester, Role.Tester);
 
-        public void RemoveTester(User tester) => RemoveObserver(tester);
+        public void RemoveTester(User tester) => _userRoleManager.RemoveUserFromRole(tester, Role.Tester);
 
         public bool AreTasksDone() => _tasks.All(t => t.State is TaskDone);
     }
