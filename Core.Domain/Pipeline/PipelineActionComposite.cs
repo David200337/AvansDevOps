@@ -24,12 +24,7 @@ namespace Core.Domain.Pipeline
         {
             foreach (var child in _children)
             {
-                bool actionSuccess;
-                actionSuccess = child.AcceptVisitor(visitor);
-                if (!actionSuccess)
-                {
-                    return false;
-                }
+                child.AcceptVisitor(visitor);
             }
             return true;
         }
