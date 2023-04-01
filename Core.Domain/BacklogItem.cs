@@ -43,19 +43,33 @@ namespace Core.Domain
         // State transitions
         public void SetToDo() => State.SetToDo(this);
 
-        public void SetInProgress() => State.SetInProgress(this);
+        public void SetInProgress()
+        {
+            var previous = ShallowCopy();
+            State.SetInProgress(this);
+            NotifyWithPreviousState(previous, this);
+        }
 
         public void SetReadyForTesting()
         {
+            var previous = ShallowCopy();
             State.SetReadyForTesting(this);
-
-            // Notify the testers that the item is ready for testing.
-            Notify(this);
+            NotifyWithPreviousState(previous, this);
         }
 
-        public void SetTesting() => State.SetTesting(this);
+        public void SetTesting()
+        {
+            var previous = ShallowCopy();
+            State.SetTesting(this);
+            NotifyWithPreviousState(previous, this);
+        }
 
-        public void SetTested() => State.SetTested(this);
+        public void SetTested()
+        {
+            var previous = ShallowCopy();
+            State.SetTested(this);
+            NotifyWithPreviousState(previous, this);
+        }
 
         public void SetDone()
         {
@@ -63,7 +77,9 @@ namespace Core.Domain
             // when its correspoding tasks are done.
             if (!AreTasksDone()) return;
 
+            var previous = ShallowCopy();
             State.SetDone(this);
+            NotifyWithPreviousState(previous, this);
         }
 
         // Observer pattern
@@ -71,7 +87,7 @@ namespace Core.Domain
 
         public void RemoveObserver(IObserver<BacklogItem> observer) => _observers.Remove(observer);
 
-        public void Notify(BacklogItem backlogItem) => _observers.ForEach(o => o.Update(backlogItem));
+        public void NotifyWithPreviousState(BacklogItem previous, BacklogItem current) => _observers.ForEach(o => o.UpdateWithPreviousState(previous, current));
 
         // Methods
         public void AddAssignee(User assignee) => _assignee = assignee;
@@ -89,5 +105,7 @@ namespace Core.Domain
         public List<User> GetTesters() => _userRoleManager.GetUsersByRole(Role.Tester);
 
         public bool AreTasksDone() => _tasks.All(t => t.State is TaskDone);
+
+        public BacklogItem ShallowCopy() => (BacklogItem)MemberwiseClone();
     }
 }

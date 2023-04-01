@@ -2,10 +2,12 @@
 {
     public interface ISubject<T>
     {
-        void RegisterObserver(IObserver<T> observer);
+        public void RegisterObserver(IObserver<T> observer);
 
-        void RemoveObserver(IObserver<T> observer);
+        public void RemoveObserver(IObserver<T> observer);
 
-        void Notify(T subject);
+        public void Notify(T subject) { }
+
+        public void NotifyWithPreviousState(T previous, T current) { }
     }
 }
