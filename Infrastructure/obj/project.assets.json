@@ -46,19 +46,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dcwva\\.nuget\\packages\\": {}
+    "C:\\Users\\Stefan\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dev\\AvansDevOps\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Dev\\AvansDevOps\\Infrastructure\\Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Dcwva\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev\\AvansDevOps\\Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Infrastructure\\Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\Stefan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Dcwva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Stefan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -72,11 +77,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Dev\\AvansDevOps\\Core.DomainServices\\Core.DomainServices.csproj": {
-              "projectPath": "C:\\Dev\\AvansDevOps\\Core.DomainServices\\Core.DomainServices.csproj"
+            "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Core.DomainServices\\Core.DomainServices.csproj": {
+              "projectPath": "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Core.DomainServices\\Core.DomainServices.csproj"
             },
-            "C:\\Dev\\AvansDevOps\\Core.Domain\\Core.Domain.csproj": {
-              "projectPath": "C:\\Dev\\AvansDevOps\\Core.Domain\\Core.Domain.csproj"
+            "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Core.Domain\\Core.Domain.csproj": {
+              "projectPath": "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Core.Domain\\Core.Domain.csproj"
             }
           }
         }

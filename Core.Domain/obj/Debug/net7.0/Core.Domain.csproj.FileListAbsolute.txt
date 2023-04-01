@@ -10,3 +10,15 @@ C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\Core.Domain.dll
 C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\refint\Core.Domain.dll
 C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\Core.Domain.pdb
 C:\Dev\AvansDevOps\Core.Domain\obj\Debug\net7.0\ref\Core.Domain.dll
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\obj\Debug\net7.0\Core.Domain.csproj.AssemblyReference.cache
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\obj\Debug\net7.0\Core.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\obj\Debug\net7.0\Core.Domain.AssemblyInfoInputs.cache
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\obj\Debug\net7.0\Core.Domain.AssemblyInfo.cs
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\obj\Debug\net7.0\Core.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\obj\Debug\net7.0\Core.Domain.dll
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\obj\Debug\net7.0\refint\Core.Domain.dll
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\obj\Debug\net7.0\Core.Domain.pdb
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\bin\Debug\net7.0\Core.Domain.deps.json
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\bin\Debug\net7.0\Core.Domain.dll
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\bin\Debug\net7.0\Core.Domain.pdb
+C:\Users\Stefan\Source\Repos\David200337\avans-devops\Core.Domain\obj\Debug\net7.0\ref\Core.Domain.dll

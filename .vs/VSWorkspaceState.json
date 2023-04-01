@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Core.Domain",
+    "\\Core.Domain\\Pipeline",
+    "\\Core.Domain\\State"
+  ],
+  "SelectedNode": "\\Core.Domain\\Pipeline\\PipelineActionComposite.cs",
+  "PreviewInSolutionExplorer": false
+}

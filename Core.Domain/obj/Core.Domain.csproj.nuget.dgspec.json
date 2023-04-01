@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\AvansDevOps\\Core.Domain\\Core.Domain.csproj": {}
+    "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Core.Domain\\Core.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\AvansDevOps\\Core.Domain\\Core.Domain.csproj": {
+    "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Core.Domain\\Core.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\AvansDevOps\\Core.Domain\\Core.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Core.Domain\\Core.Domain.csproj",
         "projectName": "Core.Domain",
-        "projectPath": "C:\\Dev\\AvansDevOps\\Core.Domain\\Core.Domain.csproj",
-        "packagesPath": "C:\\Users\\Dcwva\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\AvansDevOps\\Core.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Core.Domain\\Core.Domain.csproj",
+        "packagesPath": "C:\\Users\\Stefan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Stefan\\source\\repos\\David200337\\avans-devops\\Core.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dcwva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Stefan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
