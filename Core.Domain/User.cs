@@ -1,6 +1,6 @@
 ﻿namespace Core.Domain
 {
-    public class User
+    public abstract class User
     {
         private readonly string _id;
 

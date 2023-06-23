@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Roles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Roles\" />
+  </ItemGroup>
 </Project>
