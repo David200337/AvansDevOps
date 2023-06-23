@@ -12,7 +12,7 @@ namespace Core.Domain
 
         private DateTime _endDate;
 
-        private User? _scrumMaster;
+        private User _scrumMaster;
 
         private List<BacklogItem> _backlog;
 
@@ -75,7 +75,7 @@ namespace Core.Domain
             }
         }
 
-        public User? ScrumMaster => _scrumMaster;
+        public User ScrumMaster => _scrumMaster;
 
         public List<BacklogItem> Backlog => _backlog;
 
@@ -93,17 +93,8 @@ namespace Core.Domain
         public void SetReleaseCancelled() => State.SetReleaseCancelled(this);
 
         // Methods
-        public void AddBacklogItem(BacklogItem backlogItem)
-        {
-            // The backlog should only be allowed to be changed if the state is created.
-            if (State is SprintCreated) _backlog.Add(backlogItem);
-        }
+        public void AddBacklogItem(BacklogItem backlogItem) => _backlog.Add(backlogItem);
 
-
-        public void RemoveBacklogItem(BacklogItem backlogItem)
-        {
-            // The backlog should only be allowed to be changed if the state is created.
-            if (State is SprintCreated) _backlog.Remove(backlogItem);
-        }
+        public void RemoveBacklogItem(BacklogItem backlogItem) => _backlog.Remove(backlogItem);
     }
 }

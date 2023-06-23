@@ -90,7 +90,10 @@ StyleCopReport.xml
 *.tmp_proj
 *_wpftmp.csproj
 *.log
+<<<<<<< HEAD
 *.tlog
+=======
+>>>>>>> feature/domain-pipeline
 *.vspscc
 *.vssscc
 .builds

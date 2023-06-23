@@ -3,13 +3,13 @@ using Core.DomainServices;
 
 namespace Infrastructure
 {
-    public class MailNotificationService : NotificationService
+    public class MailNotificationService : INotificationService, Core.Domain.IObserver<Notification>
     {
-        public override void SendNotification(Notification notification)
+        public void SendNotification(string message, User user)
         {
-            Console.WriteLine("Sending notification via email...");
-            Console.WriteLine(notification.ToString());
-            Console.WriteLine("Email notification sent!");
+            throw new NotImplementedException();
         }
+
+        public void Update(Notification notification) => Console.WriteLine($"Notification service received a notification request: {0}", notification);
     }
 }
