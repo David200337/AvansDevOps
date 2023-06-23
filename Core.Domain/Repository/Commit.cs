@@ -2,7 +2,7 @@
 {
 	public class Commit
 	{
-        private string? Content { get; set;}
+        private string Content { get; set;}
 
         public Commit(string content)
         {
