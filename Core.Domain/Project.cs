@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-﻿using Core.Domain.Repository;
-=======
+
+using Core.Domain.Repository;
 ﻿using Core.Domain.Roles;
 using Core.Domain.Sprints;
->>>>>>> feature/domain-design
 
 namespace Core.Domain
 {
@@ -20,33 +18,18 @@ namespace Core.Domain
         // A list of all team member, except for the product owner and lead developer.
         private IList<User> _teamMembers;
 
-<<<<<<< HEAD
-        private IProjectRepository _repository;
-
-        public Project(string id, string name)
-=======
         private IList<Sprint> _sprints;
 
         private Sprint? _activeSprint;
 
         public Project(string id, string name, ProductOwner productOwner, LeadDeveloper leadDeveloper)
->>>>>>> feature/domain-design
         {
             _id = id;
             _name = name;
             _productOwner = productOwner;
             _leadDeveloper = leadDeveloper;
             _teamMembers = new List<User>();
-<<<<<<< HEAD
-            _repository = new ProjectRepository();
-        }
-
-        public IProjectRepository GetRepository()
-        {
-            return _repository;
-=======
             _sprints = new List<Sprint>();
->>>>>>> feature/domain-design
         }
 
         // Properties
