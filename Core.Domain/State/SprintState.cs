@@ -1,4 +1,6 @@
-﻿namespace Core.Domain.State
+﻿using Core.Domain.Sprints;
+
+namespace Core.Domain.State
 {
     public abstract class SprintState
     {

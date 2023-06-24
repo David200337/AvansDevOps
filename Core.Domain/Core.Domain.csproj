@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <None Remove="Roles\" />
+    <None Remove="Sprints\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Roles\" />
+    <Folder Include="Sprints\" />
   </ItemGroup>
 </Project>

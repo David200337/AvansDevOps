@@ -1,4 +1,6 @@
-﻿namespace Core.Domain
+﻿using Core.Domain.Sprints;
+
+namespace Core.Domain
 {
     public class FeedbackSprint : Sprint
     {

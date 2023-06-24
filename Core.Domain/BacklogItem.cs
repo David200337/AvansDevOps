@@ -1,4 +1,5 @@
-﻿using Core.Domain.State;
+﻿using Core.Domain.Roles;
+using Core.Domain.State;
 
 namespace Core.Domain
 {
@@ -14,18 +15,17 @@ namespace Core.Domain
 
         private List<Task> _tasks;
 
-        private UserRoleManager _userRoleManager;
+        private List<Tester> _testers;
 
         private List<IObserver<BacklogItem>> _observers;
 
-        public BacklogItem(string id, string title, string description, User assignee) : base(new BacklogItemToDo())
+        public BacklogItem(string id, string title, string description) : base(new BacklogItemToDo())
         {
             _id = id;
             _title = title;
             _description = description;
-            _assignee = assignee;
             _tasks = new List<Task>();
-            _userRoleManager = new UserRoleManager();
+            _testers = new List<Tester>();
             _observers = new List<IObserver<BacklogItem>>();
         }
 
@@ -98,11 +98,11 @@ namespace Core.Domain
 
         public void RemoveTask(Task task) => _tasks.Remove(task);
 
-        public void AddTester(User tester) => _userRoleManager.AddUserToRole(tester, Role.Tester);
+        public void AddTester(Tester tester) => _testers.Add(tester);
 
-        public void RemoveTester(User tester) => _userRoleManager.RemoveUserFromRole(tester, Role.Tester);
+        public void RemoveTester(Tester tester) => _testers.Remove(tester);
 
-        public List<User> GetTesters() => _userRoleManager.GetUsersByRole(Role.Tester);
+        public List<Tester> GetTesters() => _testers;
 
         public bool AreTasksDone() => _tasks.All(t => t.State is TaskDone);
 
