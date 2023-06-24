@@ -3,23 +3,23 @@ using Core.Domain.Roles;
 
 namespace Core.Domain
 {
-    public static class UserFactory<T> where T : User
+    public static class UserFactory
     {
 
-        public static User CreateUser(User type, string id, string firstName, string lastName, string email, string username)
+        public static T CreateUser<T>(string id, string firstName, string lastName, string email, string username) where T : User
         {
-            switch (type)
+            switch (typeof(T).Name)
             {
-                case ProductOwner productOwner:
-                    return new ProductOwner(id, firstName, lastName, email, username);
-                case ScrumMaster scrumMaster:
-                    return new ScrumMaster(id, firstName, lastName, email, username);
-                case LeadDeveloper leadDeveloper:
-                    return new LeadDeveloper(id, firstName, lastName, email, username);
-                case Developer developer:
-                    return new Developer(id, firstName, lastName, email, username);
-                case Tester tester:
-                    return new Tester(id, firstName, lastName, email, username);
+                case nameof(ProductOwner):
+                    return (T)(object)new ProductOwner(id, firstName, lastName, email, username);
+                case nameof(ScrumMaster):
+                    return (T)(object)new ScrumMaster(id, firstName, lastName, email, username);
+                case nameof(LeadDeveloper):
+                    return (T)(object)new LeadDeveloper(id, firstName, lastName, email, username);
+                case nameof(Developer):
+                    return (T)(object)new Developer(id, firstName, lastName, email, username);
+                case nameof(Tester):
+                    return (T)(object)new Tester(id, firstName, lastName, email, username);
                 default:
                     throw new Exception("This role has not been implemented.");
             }

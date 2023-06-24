@@ -1,4 +1,5 @@
-﻿using Core.Domain.State;
+﻿using Core.Domain.Roles;
+using Core.Domain.State;
 
 namespace Core.Domain
 {
@@ -14,16 +15,26 @@ namespace Core.Domain
 
         private List<Task> _tasks;
 
+<<<<<<< HEAD
         private Dictionary<Role, List<IObserver<BacklogItem>>> _observers;
+=======
+        private List<Tester> _testers;
 
-        public BacklogItem(string id, string title, string description, User assignee) : base(new BacklogItemToDo())
+        private List<IObserver<BacklogItem>> _observers;
+>>>>>>> feature/domain-design
+
+        public BacklogItem(string id, string title, string description) : base(new BacklogItemToDo())
         {
             _id = id;
             _title = title;
             _description = description;
-            _assignee = assignee;
             _tasks = new List<Task>();
+<<<<<<< HEAD
             _observers = new Dictionary<Role, List<IObserver<BacklogItem>>>();
+=======
+            _testers = new List<Tester>();
+            _observers = new List<IObserver<BacklogItem>>();
+>>>>>>> feature/domain-design
         }
 
         // Properties
@@ -135,9 +146,17 @@ namespace Core.Domain
 
         public void RemoveTask(Task task) => _tasks.Remove(task);
 
+<<<<<<< HEAD
         public void AddTester(User tester) => RegisterObserver(tester);
 
         public void RemoveTester(User tester) => RemoveObserver(tester);
+=======
+        public void AddTester(Tester tester) => _testers.Add(tester);
+
+        public void RemoveTester(Tester tester) => _testers.Remove(tester);
+
+        public List<Tester> GetTesters() => _testers;
+>>>>>>> feature/domain-design
 
         public bool AreTasksDone() => _tasks.All(t => t.State is TaskDone);
     }

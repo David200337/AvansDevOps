@@ -1,6 +1,6 @@
 ﻿using Core.Domain.State;
 
-namespace Core.Domain
+namespace Core.Domain.Sprints
 {
     public abstract class Sprint : Stateful<SprintState>
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Core.Domain
+namespace Core.Domain.Roles
 {
     public class ProductOwner : User
     {
