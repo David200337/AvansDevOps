@@ -50,7 +50,6 @@ namespace Core.Domain
         public IProjectRepository Repository => _repository;
 
         // Methods
-
         public void AddTeamMember(User user) => _teamMembers.Add(user);
 
         public IList<User> GetTeamMembers() => _teamMembers;
