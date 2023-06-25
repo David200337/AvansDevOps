@@ -5,7 +5,7 @@ using Core.Domain.State;
 
 namespace Core.Domain
 {
-    public class Project : Core.Domain.IObserver<Sprint>
+    public class Project : IObserver<Sprint>
     {
         private readonly string _id;
 

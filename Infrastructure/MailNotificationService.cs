@@ -4,7 +4,7 @@ using Core.DomainServices;
 
 namespace Infrastructure
 {
-    public class MailNotificationService : INotificationService, Core.Domain.IObserver<Notification>
+    public class MailNotificationService : INotificationService, Core.Domain.IObserver<BacklogItem>
     {
         private string _email;
 

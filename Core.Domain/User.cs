@@ -32,6 +32,10 @@
 
         public string FullName => $"{_firstName} {_lastName}";
 
+        public string Email => _email;
+
+        public string Username => _username;
+
         public void Update(BacklogItem subject)
         {
             string message = $"User {_username} has been notified of a state update: {subject.State.GetName()}";
