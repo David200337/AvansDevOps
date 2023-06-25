@@ -15,7 +15,7 @@ namespace Core.Domain
 
         private LeadDeveloper _leadDeveloper;
 
-        // A list of all team member, except for the product owner and lead developer.
+        // A list of all team members, except for the product owner and lead developer.
         private IList<User> _teamMembers;
 
         private IList<Sprint> _sprints;
