@@ -21,7 +21,7 @@ namespace Core.Domain.Tests.Sprints
             var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
             var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
 
-            // Assert
+            // Act & Assert
             Assert.IsType<SprintCreated>(sprint.State);
         }
 
@@ -139,6 +139,50 @@ namespace Core.Domain.Tests.Sprints
 
             // Assert
             Assert.True(observer.WasNotified);
+        }
+
+        [Fact]
+        public void Sprint_Should_GenerateReport_When_SprintIsFinished()
+        {
+            // Arrange
+            var id = "1";
+            var title = "Sprint 1";
+            var description = "This is the first sprint";
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = DateTime.Now.AddDays(14);
+            var developer = new Developer("1", "John", "Doe", "john@doe.com", "JohnDoe");
+            var scrumMaster = new ScrumMaster("2", "John", "Doe", "john@doe.com", "JohnDoe");
+            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
+            sprint.SetFinished();
+            var header = "Sprint Report";
+            var footer = "End of Report";
+            var teamMembers = new List<User> { scrumMaster, developer };
+
+            // Act
+            var report = sprint.GenerateReport(header, footer, teamMembers);
+
+            // Assert
+            Assert.NotNull(report);
+        }
+
+        [Fact]
+        public void Sprint_Should_ThrowInvalidOperationException_When_SprintIsNotFinished()
+        {
+            // Arrange
+            var id = "1";
+            var title = "Sprint 1";
+            var description = "This is the first sprint";
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = DateTime.Now.AddDays(14);
+            var developer = new Developer("1", "John", "Doe", "john@doe.com", "JohnDoe");
+            var scrumMaster = new ScrumMaster("2", "John", "Doe", "john@doe.com", "JohnDoe");
+            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
+            var header = "Sprint Report";
+            var footer = "End of Report";
+            var teamMembers = new List<User> { scrumMaster, developer };
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => sprint.GenerateReport(header, footer, teamMembers));
         }
 
         private class ConcreteSprint : Sprint
