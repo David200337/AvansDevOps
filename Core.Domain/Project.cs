@@ -49,6 +49,12 @@ namespace Core.Domain
 
         public void CreateSprint(SprintType type, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster)
         {
+            // TODO: Observe each sprint and set the sprint as the `activeSprint`
+            // once the sprint goes to in progress.
+            // This way, we ensure the project is always aware of the current active sprint.
+            // Once a sprint goes to in progress, the sprint should be removed from the `_srpints` list
+            // and assigned to the `_activeSprint` attribute.
+
             foreach (Sprint sprint in _sprints)
             {
                 if (sprint.State is SprintInProgress)
