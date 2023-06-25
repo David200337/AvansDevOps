@@ -63,5 +63,5 @@ jobs:
 
       - name: Run tests
         run: |
-        dotnet restore
-        dotnet test --configuration Release --no-build
+          dotnet restore
+          dotnet test --configuration Release --no-build
