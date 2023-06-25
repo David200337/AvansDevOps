@@ -1,4 +1,3 @@
-
 namespace Core.Domain.Pipeline
 {
     public class PipelineActionComposite : IPipelineActionComponent

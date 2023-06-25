@@ -1,6 +1,4 @@
-﻿using Core.Domain.Pipeline;
-
-namespace Core.Domain
+﻿namespace Core.Domain.Pipeline
 { 
     public interface IPipelineActionComponent
     {

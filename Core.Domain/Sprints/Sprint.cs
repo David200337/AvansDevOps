@@ -1,4 +1,5 @@
-﻿using Core.Domain.State;
+﻿using Core.Domain.Pipeline;
+using Core.Domain.State;
 
 namespace Core.Domain.Sprints
 {
@@ -16,6 +17,8 @@ namespace Core.Domain.Sprints
 
         private List<BacklogItem> _backlog;
 
+        private Pipeline.Pipeline _pipeline;
+
         public Sprint(string title, string description, DateTime startDate, DateTime endDate, User scrumMaster) : base(new SprintCreated())
         {
             _title = title;
@@ -24,6 +27,7 @@ namespace Core.Domain.Sprints
             _endDate = endDate;
             _scrumMaster = scrumMaster;
             _backlog = new List<BacklogItem>();
+            _pipeline = new Pipeline.Pipeline();
         }
 
         // Properties
@@ -78,19 +82,60 @@ namespace Core.Domain.Sprints
         public User ScrumMaster => _scrumMaster;
 
         public List<BacklogItem> Backlog => _backlog;
+        public Pipeline.Pipeline Pipeline => _pipeline;
 
         // State transitions
-        public void SetCreated() => State.SetCreated(this);
+        public void SetCreated()
+        {
+            CheckIfPipelineIsRunning();
+            State.SetCreated(this);
+        }
 
-        public void SetInProgress() => State.SetInProgress(this);
+        public void SetInProgress()
+        {
+            CheckIfPipelineIsRunning();
+            State.SetInProgress(this);
+        }
 
-        public void SetFinished() => State.SetFinished(this);
+        public void SetFinished()
+        {
+            CheckIfPipelineIsRunning();
+            State.SetFinished(this);
+        }
 
-        public void SetInRelease() => State.SetInRelease(this);
+        public void SetInRelease()
+        {
+            CheckIfPipelineIsRunning();
+            State.SetInRelease(this);
+        } 
 
-        public void SetReleased() => State.SetReleased(this);
+        public void SetReleased()
+        {
+            CheckIfPipelineIsRunning();
+            State.SetReleased(this);
+        }
 
-        public void SetReleaseCancelled() => State.SetReleaseCancelled(this);
+        public void SetReleaseCancelled()
+        {
+            CheckIfPipelineIsRunning();
+            State.SetReleaseCancelled(this);
+        }
+
+        private void CheckIfPipelineIsRunning()
+        {
+            if (_pipeline.IsStarted)
+            {
+                throw new InvalidOperationException("Cannot change state while pipeline is running.");
+            }
+        }
+
+        public void StartPipeline()
+        {
+            if (State is SprintInRelease)
+            {
+                _pipeline.StartPipeline();
+            }
+        }
 
         // Methods
         public void AddBacklogItem(BacklogItem backlogItem) => _backlog.Add(backlogItem);

@@ -15,13 +15,9 @@ namespace Core.Domain
 
         private List<Task> _tasks;
 
-<<<<<<< HEAD
-        private Dictionary<Role, List<IObserver<BacklogItem>>> _observers;
-=======
         private List<Tester> _testers;
 
         private List<IObserver<BacklogItem>> _observers;
->>>>>>> feature/domain-design
 
         public BacklogItem(string id, string title, string description) : base(new BacklogItemToDo())
         {
@@ -29,12 +25,8 @@ namespace Core.Domain
             _title = title;
             _description = description;
             _tasks = new List<Task>();
-<<<<<<< HEAD
-            _observers = new Dictionary<Role, List<IObserver<BacklogItem>>>();
-=======
             _testers = new List<Tester>();
             _observers = new List<IObserver<BacklogItem>>();
->>>>>>> feature/domain-design
         }
 
         // Properties
@@ -51,19 +43,33 @@ namespace Core.Domain
         // State transitions
         public void SetToDo() => State.SetToDo(this);
 
-        public void SetInProgress() => State.SetInProgress(this);
+        public void SetInProgress()
+        {
+            var previous = ShallowCopy();
+            State.SetInProgress(this);
+            NotifyWithPreviousState(previous, this);
+        }
 
         public void SetReadyForTesting()
         {
+            var previous = ShallowCopy();
             State.SetReadyForTesting(this);
-
-            // Notify the testers that the item is ready for testing.
-            Notify(this);
+            NotifyWithPreviousState(previous, this);
         }
 
-        public void SetTesting() => State.SetTesting(this);
+        public void SetTesting()
+        {
+            var previous = ShallowCopy();
+            State.SetTesting(this);
+            NotifyWithPreviousState(previous, this);
+        }
 
-        public void SetTested() => State.SetTested(this);
+        public void SetTested()
+        {
+            var previous = ShallowCopy();
+            State.SetTested(this);
+            NotifyWithPreviousState(previous, this);
+        }
 
         public void SetDone()
         {
@@ -71,71 +77,17 @@ namespace Core.Domain
             // when its correspoding tasks are done.
             if (!AreTasksDone()) return;
 
+            var previous = ShallowCopy();
             State.SetDone(this);
+            NotifyWithPreviousState(previous, this);
         }
 
         // Observer pattern
-        public void RegisterObserver(IObserver<BacklogItem> observer)
-        {
-            // TODO: REMOVE!
-            var role = Role.Tester;
+        public void RegisterObserver(IObserver<BacklogItem> observer) => _observers.Add(observer);
 
-            var observers = _observers.GetValueOrDefault(role);
+        public void RemoveObserver(IObserver<BacklogItem> observer) => _observers.Remove(observer);
 
-            if (observers == null)
-            {
-                // Observers for this role do not exist.
-                // Create a new list with the specified observer.
-                observers = new List<IObserver<BacklogItem>>
-                {
-                    observer
-                };
-
-                // Pass the new list of observers with corresponding role to the dictionary.
-                _observers.Add(role, observers);
-                return;
-            }
-            else if (observers.Contains(observer))
-            {
-                // The observer is already registered for this role.
-                return;
-            }
-
-            // There are existing observers for this role.
-            // Add the specified observer to the list.
-            _observers[role].Add(observer);
-        }
-
-        public void RemoveObserver(IObserver<BacklogItem> observer)
-        {
-            // TODO: REMOVE!
-            var role = Role.Tester;
-
-            var observers = _observers[role];
-
-            // No observers for this role.
-            if (observers == null) return;
-
-            // Remove the specified observer from the list.
-            _observers[role].Remove(observer);
-        }
-
-        public void Notify(BacklogItem subject)
-        {
-            // TODO: REMOVE!
-            var role = Role.Tester;
-
-            var observers = _observers[role];
-
-            // No observers for this role.
-            if (observers == null) return;
-
-            // Loop through all observers of the specified role and notify them.
-            foreach (var observer in observers)
-            {
-                observer.Update(subject);
-            }
-        }
+        public void NotifyWithPreviousState(BacklogItem previous, BacklogItem current) => _observers.ForEach(o => o.UpdateWithPreviousState(previous, current));
 
         // Methods
         public void AddAssignee(User assignee) => _assignee = assignee;
@@ -146,18 +98,14 @@ namespace Core.Domain
 
         public void RemoveTask(Task task) => _tasks.Remove(task);
 
-<<<<<<< HEAD
-        public void AddTester(User tester) => RegisterObserver(tester);
-
-        public void RemoveTester(User tester) => RemoveObserver(tester);
-=======
         public void AddTester(Tester tester) => _testers.Add(tester);
 
         public void RemoveTester(Tester tester) => _testers.Remove(tester);
 
         public List<Tester> GetTesters() => _testers;
->>>>>>> feature/domain-design
 
         public bool AreTasksDone() => _tasks.All(t => t.State is TaskDone);
+
+        public BacklogItem ShallowCopy() => (BacklogItem)MemberwiseClone();
     }
 }
