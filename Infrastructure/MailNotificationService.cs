@@ -8,7 +8,7 @@ namespace Infrastructure
     {
         private string _email;
 
-        MailNotificationService(string email)
+        public MailNotificationService(string email)
         {
             _email = email;
         }
