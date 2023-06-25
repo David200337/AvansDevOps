@@ -5,11 +5,11 @@ using Core.Domain.State;
 
 namespace Core.Domain
 {
-    public class Project
+    public class Project : Core.Domain.IObserver<Sprint>
     {
         private readonly string _id;
 
-        private string _name;
+        private string _title;
 
         private ProductOwner _productOwner;
 
@@ -24,10 +24,10 @@ namespace Core.Domain
 
         private IProjectRepository _repository;
 
-        public Project(string id, string name, ProductOwner productOwner, LeadDeveloper leadDeveloper)
+        public Project(string id, string title, ProductOwner productOwner, LeadDeveloper leadDeveloper)
         {
             _id = id;
-            _name = name;
+            _title = title;
             _productOwner = productOwner;
             _leadDeveloper = leadDeveloper;
             _teamMembers = new List<User>();
@@ -36,46 +36,107 @@ namespace Core.Domain
         }
 
         // Properties
+        public string Id => _id;
 
-        public Sprint? ActiveSprint => _activeSprint;
+        public string Title => _title;
+
+        public ProductOwner ProductOwner => _productOwner;
+
+        public LeadDeveloper LeadDeveloper => _leadDeveloper;
+
         public IProjectRepository Repository => _repository;
 
         // Methods
 
-        public void AddTeamMember(User user)
+        public void AddTeamMember(User user) => _teamMembers.Add(user);
+
+        public IList<User> GetTeamMembers() => _teamMembers;
+
+        public void CreateSprint(SprintType type, string id, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster)
         {
-            _teamMembers.Add(user);
-        }
-
-        public void CreateSprint(SprintType type, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster)
-        {
-            // TODO: Observe each sprint and set the sprint as the `activeSprint`
-            // once the sprint goes to in progress.
-            // This way, we ensure the project is always aware of the current active sprint.
-            // Once a sprint goes to in progress, the sprint should be removed from the `_srpints` list
-            // and assigned to the `_activeSprint` attribute.
-
-            foreach (Sprint sprint in _sprints)
-            {
-                if (sprint.State is SprintInProgress)
-                {
-                    _activeSprint = sprint;
-                    _sprints.Remove(sprint);
-                    break;
-                }
-            }
-
             switch (type)
             {
                 case SprintType.Release:
-                    _sprints.Add(new ReleaseSprint(title, description, startDate, endDate, scrumMaster));
+                    CreateReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
                     break;
                 case SprintType.Review:
-                    _sprints.Add(new ReviewSprint(title, description, startDate, endDate, scrumMaster));
+                    CreateReviewSprint(id, title, description, startDate, endDate, scrumMaster);
+                    break;
+                case SprintType.Feedback:
+                    CreateFeedbackSprint(id, title, description, startDate, endDate, scrumMaster);
                     break;
                 default:
                     throw new Exception("Sprint type not implemented.");
             }
+        }
+
+        public IList<Sprint> GetSprints() => _sprints;
+
+        public Sprint? GetSprint(string id) => _sprints.FirstOrDefault(s => s.Id.Equals(id));
+
+        public Sprint? GetActiveSprint() => _activeSprint;
+
+        public void StartSpint(string sprintId)
+        {
+            // Find the sprint in the list of sprints.
+            var sprint = _sprints.FirstOrDefault(s => s.Id.Equals(sprintId));
+            if (sprint is null) throw new Exception("Sprint not found");
+
+            sprint.SetInProgress();
+        }
+
+        public void FinishSprint()
+        {
+            if (_activeSprint is null) throw new Exception("No active sprint.");
+
+            _activeSprint.SetFinished();
+        }
+
+        public void UpdateWithPreviousState(Sprint previous, Sprint current)
+        {
+            // An update of a sprint has occurred.
+
+            // Check if the state has changed.
+            if (!previous.State.Equals(current.State))
+            {
+                // Perform an action based on the new sprint state.
+                switch (current.State)
+                {
+                    case SprintInProgress:
+                        // Set the sprint as the active sprint
+                        // and remove the sprint from the list of sprints.
+                        _activeSprint = current;
+                        _sprints.Remove(current);
+                        break;
+                    default:
+                        Console.WriteLine("State not implemented");
+                        break;
+                }
+            }
+        }
+
+        private void CreateReleaseSprint(string id, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster)
+        {
+            var releaseSprint = new ReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
+            releaseSprint.RegisterObserver(this);
+
+            _sprints.Add(releaseSprint);
+        }
+
+        private void CreateReviewSprint(string id, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster)
+        {
+            var reviewSprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
+            reviewSprint.RegisterObserver(this);
+
+            _sprints.Add(reviewSprint);
+        }
+
+        private void CreateFeedbackSprint(string id, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster)
+        {
+            var feedbackSprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
+            feedbackSprint.RegisterObserver(this);
+
+            _sprints.Add(feedbackSprint);
         }
     }
 }

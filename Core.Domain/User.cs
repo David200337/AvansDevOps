@@ -24,6 +24,8 @@
             _observers = new List<IObserver<Notification>>();
         }
 
+        public string Id => _id;
+
         public void Update(BacklogItem subject)
         {
             string message = $"User {_username} has been notified of a state update: {subject.State.GetName()}";

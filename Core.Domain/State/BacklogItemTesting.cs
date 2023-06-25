@@ -1,6 +1,6 @@
 ﻿namespace Core.Domain.State
 {
-    internal class BacklogItemTesting : BacklogItemState
+    public class BacklogItemTesting : BacklogItemState
     {
         public override void SetToDo(BacklogItem item) => item.SetState(new BacklogItemToDo());
 

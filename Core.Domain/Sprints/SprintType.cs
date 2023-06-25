@@ -4,7 +4,8 @@ namespace Core.Domain.Sprints
     public enum SprintType
     {
         Review,
-        Release
+        Release,
+        Feedback
     }
 }
 

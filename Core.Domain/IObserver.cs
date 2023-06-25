@@ -2,6 +2,8 @@
 {
     public interface IObserver<T>
     {
-        void Update(T subject);
+        public void Update(T subject) { }
+
+        public void UpdateWithPreviousState(T previous, T current) { }
     }
 }

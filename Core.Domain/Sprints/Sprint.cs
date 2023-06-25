@@ -3,8 +3,10 @@ using Core.Domain.State;
 
 namespace Core.Domain.Sprints
 {
-    public abstract class Sprint : Stateful<SprintState>
+    public abstract class Sprint : Stateful<SprintState>, ISubject<Sprint>
     {
+        private string _id;
+
         private string _title;
 
         private string _description;
@@ -19,8 +21,11 @@ namespace Core.Domain.Sprints
 
         private Pipeline.Pipeline _pipeline;
 
-        public Sprint(string title, string description, DateTime startDate, DateTime endDate, User scrumMaster) : base(new SprintCreated())
+        private List<IObserver<Sprint>> _observers;
+
+        public Sprint(string id, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster) : base(new SprintCreated())
         {
+            _id = id;
             _title = title;
             _description = description;
             _startDate = startDate;
@@ -28,9 +33,12 @@ namespace Core.Domain.Sprints
             _scrumMaster = scrumMaster;
             _backlog = new List<BacklogItem>();
             _pipeline = new Pipeline.Pipeline();
+            _observers = new List<IObserver<Sprint>>();
         }
 
         // Properties
+        public string Id => _id;
+
         public string Title
         {
             get => _title;
@@ -93,12 +101,19 @@ namespace Core.Domain.Sprints
 
         public void SetInProgress()
         {
+            var previous = ShallowCopy();
             CheckIfPipelineIsRunning();
             State.SetInProgress(this);
+            NotifyWithPerviousState(previous, this);
         }
 
         public void SetFinished()
         {
+            if (_startDate < DateTime.Now)
+            {
+                throw new InvalidOperationException("Cannot finish a spint before it's end date.");
+            }
+
             CheckIfPipelineIsRunning();
             State.SetFinished(this);
         }
@@ -107,7 +122,7 @@ namespace Core.Domain.Sprints
         {
             CheckIfPipelineIsRunning();
             State.SetInRelease(this);
-        } 
+        }
 
         public void SetReleased()
         {
@@ -131,15 +146,23 @@ namespace Core.Domain.Sprints
 
         public void StartPipeline()
         {
-            if (State is SprintInRelease)
-            {
-                _pipeline.StartPipeline();
-            }
+            if (State is not SprintInRelease) throw new InvalidOperationException("Sprint state should be in release.");
+
+            _pipeline.StartPipeline();
         }
+
+        // Observer pattern
+        public void RegisterObserver(IObserver<Sprint> observer) => _observers.Add(observer);
+
+        public void RemoveObserver(IObserver<Sprint> observer) => _observers.Remove(observer);
+
+        public void NotifyWithPerviousState(Sprint previous, Sprint current) => _observers.ForEach(o => o.UpdateWithPreviousState(previous, current));
 
         // Methods
         public void AddBacklogItem(BacklogItem backlogItem) => _backlog.Add(backlogItem);
 
         public void RemoveBacklogItem(BacklogItem backlogItem) => _backlog.Remove(backlogItem);
+
+        public Sprint ShallowCopy() => (Sprint)MemberwiseClone();
     }
 }
