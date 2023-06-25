@@ -24,6 +24,8 @@ namespace Core.Domain
 
         private IProjectRepository _repository;
 
+        private List<Thread> _threads;
+
         public Project(string id, string title, ProductOwner productOwner, LeadDeveloper leadDeveloper)
         {
             _id = id;
@@ -33,6 +35,7 @@ namespace Core.Domain
             _teamMembers = new List<User>();
             _sprints = new List<Sprint>();
             _repository = new ProjectRepository();
+            _threads = new List<Thread>();
         }
 
         // Properties
@@ -138,5 +141,9 @@ namespace Core.Domain
 
             _sprints.Add(feedbackSprint);
         }
+
+        public void CreateThread(string id, string title, User author, BacklogItem backlogItem) => _threads.Add(new Thread(id, title, author, backlogItem));
+
+        public List<Thread> GetThreads() => _threads;
     }
 }
