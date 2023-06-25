@@ -62,6 +62,4 @@ jobs:
           dotnet-version: 7.0.102
 
       - name: Run tests
-        run: |
-          dotnet restore
-          dotnet test --configuration Release --no-build
+        run: dotnet test --configuration Release --no-restore
