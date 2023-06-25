@@ -93,4 +93,44 @@ public class ProjectTests
         Assert.Equal(1, sprints.Count);
         Assert.Equal("Review Sprint", sprints[0].Title);
     }
+
+    [Fact]
+    public void Project_Should_CreateThread_When_ValidParameters()
+    {
+        // Arrange
+        var productOwner = UserFactory.CreateUser<ProductOwner>("1", "John", "Doe", "john@doe.com", "JohnDoe");
+        var leadDeveloper = UserFactory.CreateUser<LeadDeveloper>("2", "John", "Doe", "john@doe.com", "JohnDoe");
+        var project = new Project("1", "Project 1", productOwner, leadDeveloper);
+        var threadId = "1";
+        var threadTitle = "Thread 1";
+        var author = UserFactory.CreateUser<Developer>("2", "John", "Doe", "john@doe.com", "JohnDoe");
+        var backlogItem = new BacklogItem("1", "Backlog item", "This is a backlog item.");
+
+        // Act
+        project.CreateThread(threadId, threadTitle, author, backlogItem);
+
+        // Assert
+        var threads = project.GetThreads();
+        Assert.Single(threads);
+        Assert.Equal(threadId, threads[0].Id);
+        Assert.Equal(threadTitle, threads[0].Title);
+        Assert.Equal(author, threads[0].Author);
+        Assert.Equal(backlogItem, threads[0].BacklogItem);
+    }
+
+    [Fact]
+    public void Project_Should_ThrowArgumentNullException_When_NullBacklogItem()
+    {
+        // Arrange
+        var productOwner = UserFactory.CreateUser<ProductOwner>("1", "John", "Doe", "john@doe.com", "JohnDoe");
+        var leadDeveloper = UserFactory.CreateUser<LeadDeveloper>("2", "John", "Doe", "john@doe.com", "JohnDoe");
+        var project = new Project("1", "Project 1", productOwner, leadDeveloper);
+        var threadId = "1";
+        var threadTitle = "Thread 1";
+        var author = UserFactory.CreateUser<Developer>("2", "John", "Doe", "john@doe.com", "JohnDoe");
+        BacklogItem? backlogItem = null;
+
+        // Act & Assert
+        Assert.Throws<NullReferenceException>(() => project.CreateThread(threadId, threadTitle, author, backlogItem));
+    }
 }
