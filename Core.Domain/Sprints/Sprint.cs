@@ -164,5 +164,13 @@ namespace Core.Domain.Sprints
         public void RemoveBacklogItem(BacklogItem backlogItem) => _backlog.Remove(backlogItem);
 
         public Sprint ShallowCopy() => (Sprint)MemberwiseClone();
+
+        public string GenerateReport(string header, string footer, List<User> teamMembers)
+        {
+            if (State is not SprintFinished) throw new InvalidOperationException("A report cannot be generated on a sprint that is not yet finished.");
+
+            var report = new SprintReport(this, header, footer, teamMembers);
+            return report.GenerateReport();
+        }
     }
 }
