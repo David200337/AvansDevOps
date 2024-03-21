@@ -5,7 +5,7 @@ namespace Core.Domain.Sprints
 {
     public abstract class Sprint : Stateful<SprintState>, ISubject<Sprint>
     {
-        private string _id;
+        private readonly string _id;
 
         private string _title;
 
@@ -15,15 +15,15 @@ namespace Core.Domain.Sprints
 
         private DateTime _endDate;
 
-        private User _scrumMaster;
+        private readonly User _scrumMaster;
 
-        private List<BacklogItem> _backlog;
+        private readonly List<BacklogItem> _backlog;
 
-        private Pipeline.Pipeline _pipeline;
+        private readonly Pipeline.Pipeline _pipeline;
 
-        private List<IObserver<Sprint>> _observers;
+        private readonly List<IObserver<Sprint>> _observers;
 
-        public Sprint(string id, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster) : base(new SprintCreated())
+        protected Sprint(string id, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster) : base(new SprintCreated())
         {
             _id = id;
             _title = title;
@@ -104,14 +104,14 @@ namespace Core.Domain.Sprints
             var previous = ShallowCopy();
             CheckIfPipelineIsRunning();
             State.SetInProgress(this);
-            NotifyWithPerviousState(previous, this);
+            NotifyWithPreviousState(previous, this);
         }
 
         public void SetFinished()
         {
             if (_startDate < DateTime.Now)
             {
-                throw new InvalidOperationException("Cannot finish a spint before it's end date.");
+                throw new InvalidOperationException("Cannot finish a sprint before it's end date.");
             }
 
             CheckIfPipelineIsRunning();
@@ -156,14 +156,14 @@ namespace Core.Domain.Sprints
 
         public void RemoveObserver(IObserver<Sprint> observer) => _observers.Remove(observer);
 
-        public void NotifyWithPerviousState(Sprint previous, Sprint current) => _observers.ForEach(o => o.UpdateWithPreviousState(previous, current));
+        public void NotifyWithPreviousState(Sprint previous, Sprint current) => _observers.ForEach(o => o.UpdateWithPreviousState(previous, current));
 
         // Methods
         public void AddBacklogItem(BacklogItem backlogItem) => _backlog.Add(backlogItem);
 
         public void RemoveBacklogItem(BacklogItem backlogItem) => _backlog.Remove(backlogItem);
 
-        public Sprint ShallowCopy() => (Sprint)MemberwiseClone();
+        private Sprint ShallowCopy() => (Sprint)MemberwiseClone();
 
         public string GenerateReport(string header, string footer, List<User> teamMembers)
         {

@@ -4,17 +4,17 @@
     {
         private readonly string _id;
 
-        private string _firstName;
+        private readonly string _firstName;
 
-        private string _lastName;
+        private readonly string _lastName;
 
-        private string _email;
+        private readonly string _email;
 
-        private string _username;
+        private readonly string _username;
 
         private readonly List<IObserver<Notification>> _observers;
 
-        public User(string id, string firstName, string lastName, string email, string username)
+        protected User(string id, string firstName, string lastName, string email, string username)
         {
             _id = id;
             _firstName = firstName;
@@ -38,10 +38,10 @@
 
         public void Update(BacklogItem subject)
         {
-            string message = $"User {_username} has been notified of a state update: {subject.State.GetName()}";
+            var message = $"User {_username} has been notified of a state update: {subject.State.GetName()}";
             Console.WriteLine(message);
 
-            Notification notification = new Notification(this, message);
+            var notification = new Notification(this, message);
 
             // Notify the listeners of a new notification.
             Notify(notification);
@@ -51,6 +51,6 @@
 
         public void RemoveObserver(IObserver<Notification> observer) => _observers.Remove(observer);
 
-        public void Notify(Notification subject) => _observers.ForEach(o => o.Update(subject));
+        private void Notify(Notification subject) => _observers.ForEach(o => o.Update(subject));
     }
 }

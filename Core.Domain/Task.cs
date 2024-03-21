@@ -6,9 +6,9 @@ namespace Core.Domain
     {
         private readonly string _id;
 
-        private string _title;
+        private readonly string _title;
 
-        private string _description;
+        private readonly string _description;
 
         private User? _assignee;
 

@@ -5,19 +5,19 @@ namespace Core.Domain
 {
     public class BacklogItem : Stateful<BacklogItemState>, ISubject<BacklogItem>
     {
-        private string _id;
+        private readonly string _id;
 
-        private string _title;
+        private readonly string _title;
 
-        private string _description;
+        private readonly string _description;
 
         private User? _assignee;
 
-        private List<Task> _tasks;
+        private readonly List<Task> _tasks;
 
-        private List<Tester> _testers;
+        private readonly List<Tester> _testers;
 
-        private List<IObserver<BacklogItem>> _observers;
+        private readonly List<IObserver<BacklogItem>> _observers;
 
         public BacklogItem(string id, string title, string description) : base(new BacklogItemToDo())
         {
@@ -74,7 +74,7 @@ namespace Core.Domain
         public void SetDone()
         {
             // A backlog item's state should only be allowed to be set to done
-            // when its correspoding tasks are done.
+            // when its corresponding tasks are done.
             if (!AreTasksDone()) return;
 
             var previous = ShallowCopy();
@@ -104,7 +104,7 @@ namespace Core.Domain
 
         public List<Tester> GetTesters() => _testers;
 
-        public bool AreTasksDone() => _tasks.All(t => t.State is TaskDone);
+        public bool AreTasksDone() => _tasks.TrueForAll(t => t.State is TaskDone);
 
         public BacklogItem ShallowCopy() => (BacklogItem)MemberwiseClone();
     }

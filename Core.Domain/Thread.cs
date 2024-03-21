@@ -6,17 +6,17 @@ namespace Core.Domain
 {
     public class Thread : IObserver<BacklogItem>
     {
-        private string _id;
+        private readonly string _id;
 
-        private string _title;
+        private readonly string _title;
 
-        private User _author;
+        private readonly User _author;
 
-        private BacklogItem _backlogItem;
+        private readonly BacklogItem _backlogItem;
 
-        private List<Message> _messages;
+        private readonly List<Message> _messages;
 
-        public bool _isClosed;
+        private bool _isClosed;
 
         public Thread(string id, string title, User author, BacklogItem backlogItem)
         {

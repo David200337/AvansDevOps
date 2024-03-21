@@ -125,8 +125,8 @@ public class ProjectTests
         var productOwner = UserFactory.CreateUser<ProductOwner>("1", "John", "Doe", "john@doe.com", "JohnDoe");
         var leadDeveloper = UserFactory.CreateUser<LeadDeveloper>("2", "John", "Doe", "john@doe.com", "JohnDoe");
         var project = new Project("1", "Project 1", productOwner, leadDeveloper);
-        var threadId = "1";
-        var threadTitle = "Thread 1";
+        const string threadId = "1";
+        const string threadTitle = "Thread 1";
         var author = UserFactory.CreateUser<Developer>("2", "John", "Doe", "john@doe.com", "JohnDoe");
         BacklogItem? backlogItem = null;
 

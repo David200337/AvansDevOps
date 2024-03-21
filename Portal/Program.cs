@@ -31,7 +31,7 @@ sprint.AddBacklogItem(backlogItems[0]);
 sprint.AddBacklogItem(backlogItems[1]);
 
 // Start the sprint.
-project.StartSpint("1");
+project.StartSprint("1");
 
 // Add a backlog item to the sprint.
 var activeSprint = project.GetActiveSprint();

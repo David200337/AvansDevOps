@@ -4,11 +4,11 @@
     {
         private readonly Guid _id;
 
-        private string _content;
+        private readonly string _content;
 
-        private DateTime _createdAt;
+        private readonly DateTime _createdAt;
 
-        private User _author;
+        private readonly User _author;
 
         public Message(Guid id, string content, DateTime createdAt, User author)
         {

@@ -9,22 +9,22 @@ namespace Core.Domain
     {
         private readonly string _id;
 
-        private string _title;
+        private readonly string _title;
 
-        private ProductOwner _productOwner;
+        private readonly ProductOwner _productOwner;
 
-        private LeadDeveloper _leadDeveloper;
+        private readonly LeadDeveloper _leadDeveloper;
 
         // A list of all team members, except for the product owner and lead developer.
-        private IList<User> _teamMembers;
+        private readonly IList<User> _teamMembers;
 
-        private IList<Sprint> _sprints;
+        private readonly IList<Sprint> _sprints;
 
         private Sprint? _activeSprint;
 
-        private IProjectRepository _repository;
+        private readonly IProjectRepository _repository;
 
-        private List<Thread> _threads;
+        private readonly List<Thread> _threads;
 
         public Project(string id, string title, ProductOwner productOwner, LeadDeveloper leadDeveloper)
         {
@@ -78,7 +78,7 @@ namespace Core.Domain
 
         public Sprint? GetActiveSprint() => _activeSprint;
 
-        public void StartSpint(string sprintId)
+        public void StartSprint(string sprintId)
         {
             // Find the sprint in the list of sprints.
             var sprint = _sprints.FirstOrDefault(s => s.Id.Equals(sprintId));
