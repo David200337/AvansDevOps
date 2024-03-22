@@ -73,6 +73,28 @@ public class ProjectTests
         Assert.Contains(teamMembers, t => t.Id.Equals(developer.Id));
         Assert.Equal(3, teamMembers.Count);
     }
+    
+    [Fact]
+    public void User_Should_Not_Be_Added_Twice_To_Project()
+    {
+        // Create the users.
+        var productOwner = UserFactory.CreateUser<ProductOwner>("1", "John", "Doe", "john@doe.com", "JohnDoe");
+        var leadDeveloper = UserFactory.CreateUser<LeadDeveloper>("2", "John", "Doe", "john@doe.com", "JohnDoe");
+        var scrumMaster = UserFactory.CreateUser<ScrumMaster>("3", "John", "Doe", "john@doe.com", "JohnDoe");
+        
+        // Create a new project.
+        var project = new Project("1", "Avans DevOps", productOwner, leadDeveloper);
+        
+        // Add the scrum master to the project.
+        project.AddTeamMember(scrumMaster);
+        
+        // Try to add the scrum master again.
+        project.AddTeamMember(scrumMaster);
+        
+        var teamMembers = project.GetTeamMembers();
+        
+        Assert.Single(teamMembers, t => t.Id.Equals(scrumMaster.Id));
+    }
 
     [Fact]
     public void Sprint_Should_Be_Added_To_Project()

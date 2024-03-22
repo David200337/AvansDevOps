@@ -50,7 +50,14 @@ namespace Core.Domain
         public IProjectRepository Repository => _repository;
 
         // Methods
-        public void AddTeamMember(User user) => _teamMembers.Add(user);
+        public void AddTeamMember(User user)
+        {
+            // Check if the user is already a team member.
+            if (_teamMembers.Contains(user)) return;
+            
+            // Otherwise, add the user to the list of team members.
+            _teamMembers.Add(user);
+        } 
 
         public IList<User> GetTeamMembers() => _teamMembers;
 
