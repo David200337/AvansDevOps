@@ -1,5 +1,7 @@
 ﻿using Core.Domain.Roles;
 using Core.Domain.Sprints;
+using Core.Domain.State;
+using Infrastructure;
 
 namespace Core.Domain.Tests;
 
@@ -47,7 +49,24 @@ public class ProjectTests
         Assert.True(project.LeadDeveloper is not null);
         Assert.Equal(leadDeveloper.Id, project.LeadDeveloper.Id);
     }
-
+    
+    [Fact]
+    public void Scrum_Master_Should_Be_Added_To_Project()
+    {
+        // Create the users.
+        var productOwner = UserFactory.CreateUser<ProductOwner>("1", "John", "Doe", "john@doe.com", "JohnDoe");
+        var leadDeveloper = UserFactory.CreateUser<LeadDeveloper>("2", "John", "Doe", "john@doe.com", "JohnDoe");
+        var scrumMaster = UserFactory.CreateUser<ScrumMaster>("3", "John", "Doe", "john@doe.com", username: "JohnDoe");
+        
+        // Create a new project.
+        var project = new Project("1", "Avans DevOps", productOwner, leadDeveloper);
+        
+        // Add the scrum master to the project.
+        project.AddTeamMember(scrumMaster);
+        
+        Assert.Contains(project.GetTeamMembers(), t => t.Id.Equals(scrumMaster.Id));
+    }
+    
     [Fact]
     public void Users_Should_Be_Added_To_Project()
     {
