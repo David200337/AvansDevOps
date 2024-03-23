@@ -2,10 +2,15 @@
 {
 	public class Commit
 	{
-        private string Content { get; set;}
+        public string Content { get; set;}
 
         public Commit(string content)
         {
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                throw new ArgumentException("Content cannot be empty or null.", nameof(content));
+            }
+            
             Content = content;
         }
     }

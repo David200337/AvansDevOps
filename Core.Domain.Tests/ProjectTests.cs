@@ -1,7 +1,6 @@
-﻿using Core.Domain.Roles;
+﻿using Core.Domain.Repository;
+using Core.Domain.Roles;
 using Core.Domain.Sprints;
-using Core.Domain.State;
-using Infrastructure;
 
 namespace Core.Domain.Tests;
 
@@ -159,6 +158,40 @@ public class ProjectTests
         Assert.Equal(backlogItem, threads[0].BacklogItem);
     }
 
+    [Fact]
+    public void Repository_Should_Be_Added_To_Project()
+    {
+        // Arrange
+        var productOwner = UserFactory.CreateUser<ProductOwner>("1", "John", "Doe", "john@doe.com", "JohnDoe");
+        var leadDeveloper = UserFactory.CreateUser<LeadDeveloper>("2", "John", "Doe", "john@doe.com", "JohnDoe");
+        var project = new Project("1", "Project 1", productOwner, leadDeveloper);
+        var repository = new ProjectRepository();
+        
+        // Act
+        project.AddRepository(repository);
+        
+        // Assert
+        Assert.Equal(repository, project.Repository);
+    }
+    
+    [Fact]
+    public void Repository_Should_Be_Replaced()
+    {
+        // Arrange
+        var productOwner = UserFactory.CreateUser<ProductOwner>("1", "John", "Doe", "john@doe.com", "JohnDoe");
+        var leadDeveloper = UserFactory.CreateUser<LeadDeveloper>("2", "John", "Doe", "john@doe.com", "JohnDoe");
+        var project = new Project("1", "Project 1", productOwner, leadDeveloper);
+        var repository = new ProjectRepository();
+        var newRepository = new ProjectRepository();
+        
+        // Act
+        project.AddRepository(repository);
+        project.AddRepository(newRepository);
+        
+        // Assert
+        Assert.Equal(newRepository, project.Repository);
+    }
+    
     [Fact]
     public void Project_Should_ThrowArgumentNullException_When_NullBacklogItem()
     {

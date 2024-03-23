@@ -22,7 +22,7 @@ namespace Core.Domain
 
         private Sprint? _activeSprint;
 
-        private readonly IProjectRepository _repository;
+        private IProjectRepository _repository;
 
         private readonly List<Thread> _threads;
 
@@ -99,6 +99,11 @@ namespace Core.Domain
             if (_activeSprint is null) throw new Exception("No active sprint.");
 
             _activeSprint.SetFinished();
+        }
+
+        public void AddRepository(ProjectRepository repository)
+        {
+            _repository = repository;
         }
 
         public void UpdateWithPreviousState(Sprint previous, Sprint current)

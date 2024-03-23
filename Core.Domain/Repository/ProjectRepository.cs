@@ -13,7 +13,7 @@
 
         public bool AddBranch(string branchName)
         {
-            if (!_branches.Exists(b => b.Name == branchName)) return false;
+            if (_branches.Exists(b => b.Name == branchName)) return false;
             {
                 _branches.Add(new Branch(branchName));
 
@@ -39,12 +39,9 @@
         public bool RemoveBranch(string branchName)
         {
             if (!_branches.Exists(b => b.Name == branchName)) return false;
-            {
-                _branches.Remove(_branches.First(b => b.Name == branchName));
-
-                return true;
-            }
-
+            
+            _branches.Remove(_branches.First(b => b.Name == branchName));
+            return true;
         }
 
         public bool SetMainBranch(string branchName)
