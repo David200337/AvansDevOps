@@ -18,6 +18,10 @@ namespace Core.Domain.Pipeline
 
         public bool StartAction()
         {
+            if (_actions == null || _actions.Count == 0)
+            {
+                throw new ArgumentException("Actions cannot be null or empty.");
+            }
             foreach (var action in _actions)
             {
                 Console.WriteLine($"Running {action}");

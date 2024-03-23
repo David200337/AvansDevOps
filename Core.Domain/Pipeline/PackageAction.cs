@@ -13,6 +13,10 @@
 
         public bool StartAction()
         {
+            if (_packages == null || _packages.Count == 0)
+            {
+                throw new ArgumentException("Packages cannot be null or empty.");
+            }
             Console.WriteLine("Installing packages:");
             foreach (var package in _packages)
             {

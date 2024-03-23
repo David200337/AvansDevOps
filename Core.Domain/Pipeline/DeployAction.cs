@@ -19,6 +19,10 @@ namespace Core.Domain.Pipeline
 
         public bool StartAction()
         {
+            if (string.IsNullOrWhiteSpace(_deploymentTarget))
+            {
+                throw new ArgumentException("Deployment target cannot be null or empty.");
+            }
             Console.WriteLine($"Deploying to {_deploymentTarget}");
             return true;
         }

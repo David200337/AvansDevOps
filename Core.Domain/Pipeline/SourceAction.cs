@@ -19,6 +19,10 @@ namespace Core.Domain.Pipeline
 
         public bool StartAction()
         {
+            if (string.IsNullOrWhiteSpace(_sourceUrl))
+            {
+                throw new ArgumentException("Source URL cannot be null or empty.");
+            }
             Console.WriteLine($"Downloading source repository from {_sourceUrl}");
             return true;
         }

@@ -1,7 +1,7 @@
 ﻿
 namespace Core.Domain.Pipeline
 {
-    internal class PipelineActionVisitor : IPipelineActionVisitor
+    public class PipelineActionVisitor : IPipelineActionVisitor
     {
         public bool VisitPipeline(Pipeline pipeline) => pipeline.StartPipeline();
         public bool VisitSourceAction(SourceAction sourceAction) => sourceAction.StartAction();

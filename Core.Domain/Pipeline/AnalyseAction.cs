@@ -18,6 +18,10 @@ namespace Core.Domain.Pipeline
 
         public bool StartAction()
         {
+            if (string.IsNullOrWhiteSpace(_analysisTool))
+            {
+                throw new ArgumentException("Analysis tool cannot be null or empty.");
+            }
             Console.WriteLine($"Running {_analysisTool} code analysis");
             return true;
         }

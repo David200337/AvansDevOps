@@ -20,6 +20,10 @@ namespace Core.Domain.Pipeline
 
         public bool StartAction()
         {
+            if (string.IsNullOrWhiteSpace(_testFramework))
+            {
+                throw new ArgumentException("Test framework cannot be null or empty.");
+            }
             Console.WriteLine($"Running {_testFramework} tests");
             _testsDone = true;
             return true;

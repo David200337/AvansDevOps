@@ -4,6 +4,8 @@ namespace Core.Domain.Pipeline
     {
         private readonly List<IPipelineActionComponent> _children;
 
+        public List<IPipelineActionComponent> Children => _children; 
+
         public PipelineActionComposite()
         {
             _children = new List<IPipelineActionComponent>();
@@ -23,7 +25,9 @@ namespace Core.Domain.Pipeline
         {
             foreach (var child in _children)
             {
-                child.AcceptVisitor(visitor);
+                bool success = child.AcceptVisitor(visitor);
+                if (!success)
+                    return false;
             }
             return true;
         }
