@@ -80,13 +80,13 @@ public class PipelineTests
         var sprint = new ReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
 
         var sourceAction = new SourceAction("");
-        var packages = new List<String> { "Package1", "Package2" };
+        var packages = new List<string> { "Package1", "Package2" };
         var packageAction = new PackageAction(packages);
         var buildAction = new BuildAction("");
         var testAction = new TestAction("XUnit");
         var analyzeAction = new AnalyseAction("SonarQube");
         var deployAction = new DeployAction("Deploy");
-        var utilityActions = new List<String> { "Utility1", "Utility2" };
+        var utilityActions = new List<string> { "Utility1", "Utility2" };
         var utilityAction = new UtilityAction(utilityActions);
 
         // Act

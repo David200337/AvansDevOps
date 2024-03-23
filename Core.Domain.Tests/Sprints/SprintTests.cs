@@ -106,7 +106,7 @@ namespace Core.Domain.Tests.Sprints
             const string id = "1";
             const string title = "Sprint 1";
             const string description = "This is the first sprint";
-            var startDate = DateTime.Now.AddDays(1);
+            var startDate = DateTime.Now.AddDays(-1);
             var endDate = DateTime.Now.AddDays(14);
             var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
             var sprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
@@ -198,7 +198,7 @@ namespace Core.Domain.Tests.Sprints
             sprint.SetInRelease();
             
             // Assert
-            Assert.True(sprint.Pipeline.IsStarted);
+            Assert.True(sprint.Pipeline.HasRun);
         }
 
         [Fact]

@@ -153,7 +153,7 @@ namespace Core.Domain.Sprints
         {
             if (State is not SprintInRelease) throw new InvalidOperationException("Sprint state should be in release.");
 
-            _pipeline.StartPipeline();
+            _pipeline.AcceptVisitor(new PipelineActionVisitor());
         }
 
         // Observer pattern

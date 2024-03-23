@@ -121,11 +121,8 @@ namespace Core.Domain.Tests
             backlogItem.AddTask(new Task("2", "Task 2", "This is task 2", user));
             backlogItem.Tasks[0].SetDone();
 
-            // Act
-            backlogItem.SetDone();
-
-            // Assert
-            Assert.IsNotType<BacklogItemDone>(backlogItem.State);
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => backlogItem.SetDone());
         }
 
         [Fact]
