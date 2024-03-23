@@ -79,10 +79,10 @@ public class PipelineTests
         var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
         var sprint = new ReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
 
-        var sourceAction = new SourceAction(null);
+        var sourceAction = new SourceAction("");
         var packages = new List<String> { "Package1", "Package2" };
         var packageAction = new PackageAction(packages);
-        var buildAction = new BuildAction(null);
+        var buildAction = new BuildAction("");
         var testAction = new TestAction("XUnit");
         var analyzeAction = new AnalyseAction("SonarQube");
         var deployAction = new DeployAction("Deploy");
