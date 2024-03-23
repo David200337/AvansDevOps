@@ -106,21 +106,20 @@ namespace Core.Domain
             // An update of a sprint has occurred.
 
             // Check if the state has changed.
-            if (!previous.State.Equals(current.State))
+            if (previous.State.Equals(current.State)) return;
+            
+            // If so, perform an action based on the new sprint state.
+            switch (current.State)
             {
-                // Perform an action based on the new sprint state.
-                switch (current.State)
-                {
-                    case SprintInProgress:
-                        // Set the sprint as the active sprint
-                        // and remove the sprint from the list of sprints.
-                        _activeSprint = current;
-                        _sprints.Remove(current);
-                        break;
-                    default:
-                        Console.WriteLine("State not implemented");
-                        break;
-                }
+                case SprintInProgress:
+                    // Set the sprint as the active sprint
+                    // and remove the sprint from the list of sprints.
+                    _activeSprint = current;
+                    _sprints.Remove(current);
+                    break;
+                default:
+                    Console.WriteLine("State not implemented");
+                    break;
             }
         }
 

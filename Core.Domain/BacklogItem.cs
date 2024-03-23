@@ -75,7 +75,7 @@ namespace Core.Domain
         {
             // A backlog item's state should only be allowed to be set to done
             // when its corresponding tasks are done.
-            if (!AreTasksDone()) return;
+            if (!AreTasksDone()) throw new InvalidOperationException("Associated tasks are not done.");
 
             var previous = ShallowCopy();
             State.SetDone(this);

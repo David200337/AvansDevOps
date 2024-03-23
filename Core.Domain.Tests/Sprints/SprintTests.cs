@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
 using Core.Domain.Roles;
 using Core.Domain.Sprints;
 using Core.Domain.State;
-using Xunit;
 
 namespace Core.Domain.Tests.Sprints
 {
@@ -13,13 +10,13 @@ namespace Core.Domain.Tests.Sprints
         public void Sprint_Should_Be_Created_When_Created()
         {
             // Arrange
-            var id = "1";
-            var title = "Sprint 1";
-            var description = "This is the first sprint";
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
             var startDate = DateTime.Now.AddDays(1);
             var endDate = DateTime.Now.AddDays(14);
             var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
-            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
+            var sprint = new ReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
 
             // Act & Assert
             Assert.IsType<SprintCreated>(sprint.State);
@@ -29,13 +26,13 @@ namespace Core.Domain.Tests.Sprints
         public void Sprint_Should_Be_In_Progress_When_In_Progress()
         {
             // Arrange
-            var id = "1";
-            var title = "Sprint 1";
-            var description = "This is the first sprint";
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
             var startDate = DateTime.Now.AddDays(1);
             var endDate = DateTime.Now.AddDays(14);
             var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
-            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
+            var sprint = new ReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
 
             // Act
             sprint.SetInProgress();
@@ -48,13 +45,13 @@ namespace Core.Domain.Tests.Sprints
         public void Sprint_Should_Throw_InvalidOperationException_When_Setting_Title_At_Non_Created_State()
         {
             // Arrange
-            var id = "1";
-            var title = "Sprint 1";
-            var description = "This is the first sprint";
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
             var startDate = DateTime.Now.AddDays(1);
             var endDate = DateTime.Now.AddDays(14);
             var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
-            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
+            var sprint = new ReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
             sprint.SetInProgress();
 
             // Act & Assert
@@ -65,13 +62,13 @@ namespace Core.Domain.Tests.Sprints
         public void Sprint_Should_Add_Backlog_Item_When_Adding_Backlog_Item()
         {
             // Arrange
-            var id = "1";
-            var title = "Sprint 1";
-            var description = "This is the first sprint";
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
             var startDate = DateTime.Now.AddDays(1);
             var endDate = DateTime.Now.AddDays(14);
             var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
-            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
+            var sprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
             var backlogItem = new BacklogItem("1", "Backlog Item 1", "This is the first backlog item");
 
             // Act
@@ -85,13 +82,13 @@ namespace Core.Domain.Tests.Sprints
         public void Sprint_Should_Remove_Backlog_Item_When_Removing_Backlog_Item()
         {
             // Arrange
-            var id = "1";
-            var title = "Sprint 1";
-            var description = "This is the first sprint";
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
             var startDate = DateTime.Now.AddDays(1);
             var endDate = DateTime.Now.AddDays(14);
             var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
-            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
+            var sprint = new ReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
             var backlogItem = new BacklogItem("1", "Backlog Item 1", "This is the first backlog item");
             sprint.AddBacklogItem(backlogItem);
 
@@ -106,13 +103,13 @@ namespace Core.Domain.Tests.Sprints
         public void Sprint_Should_Throw_InvalidOperationException_When_Changing_State_While_Pipeline_Is_Running()
         {
             // Arrange
-            var id = "1";
-            var title = "Sprint 1";
-            var description = "This is the first sprint";
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
             var startDate = DateTime.Now.AddDays(1);
             var endDate = DateTime.Now.AddDays(14);
             var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
-            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
+            var sprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
             sprint.SetInRelease();
             sprint.StartPipeline();
 
@@ -124,14 +121,14 @@ namespace Core.Domain.Tests.Sprints
         public void Sprint_Should_Notify_Observers_When_State_Changes()
         {
             // Arrange
-            var id = "1";
-            var title = "Sprint 1";
-            var description = "This is the first sprint";
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
             var startDate = DateTime.Now.AddDays(1);
             var endDate = DateTime.Now.AddDays(14);
             var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
-            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
-            var observer = new ConcreteObserver();
+            var sprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
+            var observer = new TestObserver();
             sprint.RegisterObserver(observer);
 
             // Act
@@ -142,20 +139,125 @@ namespace Core.Domain.Tests.Sprints
         }
 
         [Fact]
+        public void Sprint_Should_Not_Notify_Observers_When_State_Does_Not_Change()
+        {
+            // Arrange
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = DateTime.Now.AddDays(14);
+            var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
+            var sprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
+            var observer = new TestObserver();
+            sprint.RegisterObserver(observer);
+            
+            // Act
+            // No state change, state should remain SprintCreated
+            
+            // Assert
+            Assert.False(observer.WasNotified);
+        }
+
+        [Fact]
+        public void Sprint_Should_Not_Notify_Observers_When_ReleaseInProgress()
+        {
+            // Arrange
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = DateTime.Now.AddDays(14);
+            var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
+            var sprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
+            var observer = new TestObserver();
+            sprint.RegisterObserver(observer);
+
+            // Act
+            sprint.SetInRelease();
+            
+            // Assert
+            Assert.False(observer.WasNotified);
+        }
+
+        [Fact]
+        public void Sprint_Should_Start_Pipeline_When_ReleaseInProgress()
+        {
+            // Arrange
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = DateTime.Now.AddDays(14);
+            var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
+            var sprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
+            var observer = new TestObserver();
+            sprint.RegisterObserver(observer);
+            
+            // Act
+            sprint.SetInRelease();
+            
+            // Assert
+            Assert.True(sprint.Pipeline.IsStarted);
+        }
+
+        [Fact]
+        public void Sprint_Should_Notify_Scrum_Master_When_Released()
+        {
+            // Arrange
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = DateTime.Now.AddDays(14);
+            var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
+            var sprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
+            var observer = new TestObserver();
+            sprint.RegisterObserver(observer);
+            
+            // Act
+            sprint.SetReleased();
+            
+            // Assert
+            Assert.True(observer.WasNotified);
+        }
+
+        [Fact]
+        public void Sprint_Should_Notify_Scrum_Master_When_ReleaseCancelled()
+        {
+            // Arrange
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
+            var startDate = DateTime.Now.AddDays(1);
+            var endDate = DateTime.Now.AddDays(14);
+            var scrumMaster = new ScrumMaster("1", "John", "Doe", "john@doe.com", "JohnDoe");
+            var sprint = new ReviewSprint(id, title, description, startDate, endDate, scrumMaster);
+            var observer = new TestObserver();
+            sprint.RegisterObserver(observer);
+            
+            // Act
+            sprint.SetReleaseCancelled();
+            
+            // Assert
+            Assert.True(observer.WasNotified);
+        }
+
+        [Fact]
         public void Sprint_Should_GenerateReport_When_SprintIsFinished()
         {
             // Arrange
-            var id = "1";
-            var title = "Sprint 1";
-            var description = "This is the first sprint";
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
             var startDate = DateTime.Now.AddDays(1);
             var endDate = DateTime.Now.AddDays(14);
             var developer = new Developer("1", "John", "Doe", "john@doe.com", "JohnDoe");
             var scrumMaster = new ScrumMaster("2", "John", "Doe", "john@doe.com", "JohnDoe");
-            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
+            var sprint = new ReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
             sprint.SetFinished();
-            var header = "Sprint Report";
-            var footer = "End of Report";
+            const string header = "Sprint Report";
+            const string footer = "End of Report";
             var teamMembers = new List<User> { scrumMaster, developer };
 
             // Act
@@ -169,30 +271,23 @@ namespace Core.Domain.Tests.Sprints
         public void Sprint_Should_ThrowInvalidOperationException_When_SprintIsNotFinished()
         {
             // Arrange
-            var id = "1";
-            var title = "Sprint 1";
-            var description = "This is the first sprint";
+            const string id = "1";
+            const string title = "Sprint 1";
+            const string description = "This is the first sprint";
             var startDate = DateTime.Now.AddDays(1);
             var endDate = DateTime.Now.AddDays(14);
             var developer = new Developer("1", "John", "Doe", "john@doe.com", "JohnDoe");
             var scrumMaster = new ScrumMaster("2", "John", "Doe", "john@doe.com", "JohnDoe");
-            var sprint = new ConcreteSprint(id, title, description, startDate, endDate, scrumMaster);
-            var header = "Sprint Report";
-            var footer = "End of Report";
+            var sprint = new ReleaseSprint(id, title, description, startDate, endDate, scrumMaster);
+            const string header = "Sprint Report";
+            const string footer = "End of Report";
             var teamMembers = new List<User> { scrumMaster, developer };
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => sprint.GenerateReport(header, footer, teamMembers));
         }
-
-        private class ConcreteSprint : Sprint
-        {
-            public ConcreteSprint(string id, string title, string description, DateTime startDate, DateTime endDate, User scrumMaster) : base(id, title, description, startDate, endDate, scrumMaster)
-            {
-            }
-        }
-
-        private class ConcreteObserver : IObserver<Sprint>
+        
+        private class TestObserver : IObserver<Sprint>
         {
             public bool WasNotified { get; private set; }
 

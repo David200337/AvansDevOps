@@ -122,18 +122,23 @@ namespace Core.Domain.Sprints
         {
             CheckIfPipelineIsRunning();
             State.SetInRelease(this);
+            StartPipeline();
         }
 
         public void SetReleased()
         {
+            var previous = ShallowCopy();
             CheckIfPipelineIsRunning();
             State.SetReleased(this);
+            NotifyWithPreviousState(previous, this);
         }
 
         public void SetReleaseCancelled()
         {
+            var previous = ShallowCopy();
             CheckIfPipelineIsRunning();
             State.SetReleaseCancelled(this);
+            NotifyWithPreviousState(previous, this);
         }
 
         private void CheckIfPipelineIsRunning()
