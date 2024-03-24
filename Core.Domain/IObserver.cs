@@ -1,6 +1,6 @@
 ﻿namespace Core.Domain
 {
-    public interface IObserver<T>
+    public interface IObserver<in T>
     {
         public void Update(T subject) { }
 

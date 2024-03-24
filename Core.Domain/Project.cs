@@ -75,7 +75,7 @@ namespace Core.Domain
                     CreateFeedbackSprint(id, title, description, startDate, endDate, scrumMaster);
                     break;
                 default:
-                    throw new Exception("Sprint type not implemented.");
+                    throw new NotImplementedException("Sprint type not implemented.");
             }
         }
 
@@ -89,7 +89,7 @@ namespace Core.Domain
         {
             // Find the sprint in the list of sprints.
             var sprint = _sprints.FirstOrDefault(s => s.Id.Equals(sprintId));
-            if (sprint is null) throw new Exception("Sprint not found");
+            if (sprint is null) throw new Exception("Sprint not found.");
 
             sprint.SetInProgress();
         }

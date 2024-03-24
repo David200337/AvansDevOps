@@ -202,9 +202,8 @@ public class ProjectTests
         const string threadId = "1";
         const string threadTitle = "Thread 1";
         var author = UserFactory.CreateUser<Developer>("2", "John", "Doe", "john@doe.com", "JohnDoe");
-        BacklogItem? backlogItem = null;
 
         // Act & Assert
-        Assert.Throws<NullReferenceException>(() => project.CreateThread(threadId, threadTitle, author, backlogItem));
+        Assert.Throws<NullReferenceException>(() => project.CreateThread(threadId, threadTitle, author, null));
     }
 }
