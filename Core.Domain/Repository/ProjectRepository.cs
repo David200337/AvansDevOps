@@ -14,16 +14,14 @@
         public bool AddBranch(string branchName)
         {
             if (_branches.Exists(b => b.Name == branchName)) return false;
-            {
-                _branches.Add(new Branch(branchName));
-
-                return true;
-            }
+            
+            _branches.Add(new Branch(branchName));
+            return true;
         }
 
         public Branch? GetBranch(string branchName)
         {
-            return _branches.FirstOrDefault(b => b.Name == branchName);
+            return _branches.First(b => b.Name == branchName);
         }
 
         public List<Branch> GetBranches()
@@ -47,12 +45,9 @@
         public bool SetMainBranch(string branchName)
         {
             if (!_branches.Exists(b => b.Name == branchName)) return false;
-            {
-                _mainBranch = _branches.First(b => b.Name == branchName);
-
-                return true;
-            }
-
+            
+            _mainBranch = _branches.First(b => b.Name == branchName);
+            return true;
         }
     }
 }
