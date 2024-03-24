@@ -75,7 +75,7 @@ namespace Core.Domain
                     CreateFeedbackSprint(id, title, description, startDate, endDate, scrumMaster);
                     break;
                 default:
-                    throw new NotImplementedException("Sprint type not implemented.")
+                    throw new NotImplementedException("Sprint type not implemented.");
             }
         }
 
