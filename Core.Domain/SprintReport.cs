@@ -5,13 +5,13 @@ namespace Core.Domain
 {
     public class SprintReport
     {
-        private Sprint _sprint;
+        private readonly Sprint _sprint;
 
-        private string _header;
+        private readonly string _header;
 
-        private string _footer;
+        private readonly string _footer;
 
-        private List<User> _teamMembers;
+        private readonly List<User> _teamMembers;
 
         public SprintReport(Sprint sprint, string header, string footer, List<User> teamMembers)
         {
@@ -23,7 +23,7 @@ namespace Core.Domain
 
         public string GenerateReport()
         {
-            var report = "SPRINT REPORT\n";
+            var report = $"SPRINT REPORT ({_sprint.Title})\n";
             report += $"{_header}\n";
             report += "\nTeam Members:\n";
 

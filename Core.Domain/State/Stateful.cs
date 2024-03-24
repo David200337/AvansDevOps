@@ -4,7 +4,7 @@
     {
         private T _state;
 
-        public Stateful(T initialState) => _state = initialState;
+        protected Stateful(T initialState) => _state = initialState;
 
         public T State => _state;
 

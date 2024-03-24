@@ -9,6 +9,6 @@
         public bool VisitTestAction(TestAction testAction);
         public bool VisitAnalyseAction(AnalyseAction analyzeAction);
         public bool VisitDeployAction(DeployAction deployAction);
-        public bool VisitUtilityAction(UtilityAction utilAction);
+        public bool VisitUtilityAction(UtilityAction utilityAction);
     }
 }
